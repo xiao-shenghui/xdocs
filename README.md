@@ -19,7 +19,16 @@
   - index.md 首页
 
 ## 最新效果图
-- 首页
+- 首页2.0
+<img src="./mdImg/home-2.0.png">
+
+- 丰富的前端知识
+<img src="./mdImg/tool.png">
+
+- 夜间模式
+<img src="./mdImg/dark.png">
+
+- 首页1.0
 <img src="./mdImg/home.png">
 
 - 侧边栏和导航栏

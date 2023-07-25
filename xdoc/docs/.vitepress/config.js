@@ -14,12 +14,48 @@ module.exports = {
       // target 打开方式
       {
         // items子级下拉框
+        text: 'Javascript',
+        items: [
+          { text: 'JS基础', link: '/javascript/jsbasic/index' },
+          { text: 'JS高级', link: '/javascript/jsdeep/index' },
+          { text: 'ES6及6+', link: '/javascript/es6/index' },
+        ]
+      },
+      {
+        // items子级下拉框
         text: 'Vue',
         items: [
           { text: 'Vue2', link: '/vue/vue2/index' },
           { text: 'Vue-Router', link: '/vue/vue-router/index' },
           { text: 'VueX', link: '/vue/vuex/index' },
           { text: 'Vue3', link: '/vue/vue3/index' },
+        ]
+      },
+      {
+        // items子级下拉框
+        text: 'React',
+        items: [
+          { text: 'JSX', link: '/react/jsx/JSX' },
+          { text: 'React18', link: '/react/react18/create-react-app' }
+        ]
+      },
+      {
+        text: '工具库',
+        items: [
+          { text: 'Axios',link: '/tool/axios/index' },
+          { text: 'Element-Ui',link: '/tool/element-ui/index' },
+          { text: 'jQuery',link: '/tool/jquery/jQuery' },
+        ]
+      },
+      {
+        text: '杂七杂八',
+        items: [
+          { text: 'Express',link: '/other/express' },
+          { text: 'Gitee',link: '/other/git的使用体验' },
+          { text: 'Typescript',link: '/other/typescript' },
+          { text: 'Less',link: '/other/less的使用' },
+          { text: 'Mysql',link: '/other/mysql' },
+          { text: 'Nvm',link: '/other/nvm' }
         ]
       },
       { text: '配置网站', link: 'https://vitepress.dev/reference/default-theme-nav' },
@@ -30,6 +66,7 @@ module.exports = {
       '/vue/vue2': [
         {
           text: 'Vue2',
+          collapsed: true,
           // items,子级
           items: [
             { text: '导航目录', link: '/vue/vue2/index' },
@@ -45,6 +82,7 @@ module.exports = {
       '/vue/vue3': [
         {
           text: 'Vue3',
+          collapsed: true,
           // items,子级
           items: [
             { text: '导航目录', link: '/vue/vue3/index' }
@@ -54,6 +92,7 @@ module.exports = {
       '/vue/vue-router': [
         {
           text: 'Vue-Router',
+          collapsed: true,
           // items,子级
           items: [
             { text: '导航目录', link: '/vue/vue-router/index' },
@@ -65,6 +104,7 @@ module.exports = {
       '/vue/vuex': [
         {
           text: 'VueX',
+          collapsed: true,
           // items,子级
           items: [
             { text: '导航目录', link: '/vue/vuex/index' },
@@ -72,6 +112,70 @@ module.exports = {
           ]
         }
       ],
+      '/react/jsx': [
+        {
+          text: 'JSX', link: '/react/jsx'
+        }
+      ],
+      '/react/react18': [
+        {
+          text: 'React18',
+          items: [
+            { text: 'create-react-app', link: '/react/react18/create-react-app' },
+            { text: 'React基础', link: '/react/react18/React基础' },
+          ]
+        }
+      ],
+      '/tool/axios': [
+        {
+          text: 'Axios',
+          items: [
+            { text: 'index', link: '/tool/axios/index' },
+            { text: 'axios基本使用', link: '/tool/axios/axios基本使用' },
+            { text: 'axios拦截器', link: '/tool/axios/axios拦截器' },
+          ]
+        }
+      ],
+      '/tool/element-ui': [
+        {
+          text: 'ElementUI',
+          items: [
+            { text: 'index', link: '/tool/element-ui/index' },
+            { text: 'el-row及el-col源码', link: '/tool/element-ui/el-row及el-col源码' },
+            { text: 'el-container源码', link: '/tool/element-ui/el-container源码' },
+            { text: 'el-radio源码', link: '/tool/element-ui/el-radio源码' },
+          ]
+        }
+      ],
+      '/tool/jquery': [
+        {
+          text: 'jQuery', link: '/tool/jquery/jQuery' 
+        }
+      ],
+      '/javascript/jsbasic': [
+        {
+          text: 'JS基础',
+          items: [
+            { text: 'index', link: '/javascript/jsbasic/index' },
+          ]
+        }
+      ],
+      '/javascript/jsdeep': [
+        {
+          text: 'JS高级',
+          items: [
+            { text: 'index', link: '/javascript/jsdeep/index' },
+          ]
+        }
+      ],
+      '/javascript/es6': [
+        {
+          text: 'ES6-6+',
+          items: [
+            { text: 'index', link: '/javascript/es6/index' },
+          ]
+        }
+      ]
     },
     // 底部,支持a标签
     footer: {

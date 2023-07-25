@@ -1,9 +1,9 @@
 ---
 next:
-  text: 'vue指令'
-  link: './vue指令'
+  text: 'es6'
+  link: './es6'
 ---
-
+## es6
 ## 导航目录
 - [vue指令](./vue指令)
 - [vue组件](./vue组件)

@@ -4,6 +4,7 @@ next:
   link: './vue指令'
 ---
 
+## jsbasic
 ## 导航目录
 - [vue指令](./vue指令)
 - [vue组件](./vue组件)
