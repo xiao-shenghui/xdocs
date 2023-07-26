@@ -1,13 +1,9 @@
 ---
 next:
-  text: 'vue指令'
-  link: './vue指令'
+  text: 'JS进阶'
+  link: './JS进阶'
 ---
 ## jsdeep
 ## 导航目录
-- [vue指令](./vue指令)
-- [vue组件](./vue组件)
-- [vue插槽](./vue插槽)
-- [vue父子数据互传](./vue父子数据互传)
-- [vue扩展和插件](./vue扩展和插件)
-- [vue-render渲染函数](./vue-render渲染函数)
+- [JS进阶](./JS进阶)
+- [面试题](./面试题)

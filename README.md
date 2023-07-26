@@ -19,6 +19,9 @@
   - index.md 首页
 
 ## 最新效果图
+- 丰富javascript文档
+<img src="./mdImg/javascript.png">
+
 - 首页2.0
 <img src="./mdImg/home-2.0.png">
 

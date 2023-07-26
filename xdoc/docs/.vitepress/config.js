@@ -157,6 +157,9 @@ module.exports = {
           text: 'JS基础',
           items: [
             { text: 'index', link: '/javascript/jsbasic/index' },
+            { text: 'JS基础', link: '/javascript/jsbasic/JS基础' },
+            { text: 'DOM', link: '/javascript/jsbasic/DOM' },
+            { text: 'BOM', link: '/javascript/jsbasic/BOM' }
           ]
         }
       ],
@@ -165,6 +168,8 @@ module.exports = {
           text: 'JS高级',
           items: [
             { text: 'index', link: '/javascript/jsdeep/index' },
+            { text: 'JS进阶', link: '/javascript/jsdeep/JS进阶' },
+            { text: '面试题', link: '/javascript/jsdeep/面试题' },
           ]
         }
       ],
