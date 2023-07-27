@@ -1,6 +1,6 @@
 ## 一些日志
-- 博客模板: vitepress
-- [官方网址]: (https://vitepress.dev/reference/)
+- 博客模板: vitepress  
+- [vitepress官方网址]: (https://vitepress.dev/reference/)
 - 博客搭建工具: npm, cnpm, markdown
 - vitepress优势: 
   - vite工具搭建,
@@ -19,6 +19,9 @@
   - index.md 首页
 
 ## 最新效果图
+- ES6和Promise
+<img src="./mdImg/ES6和Promise.png">
+
 - 丰富javascript文档
 <img src="./mdImg/javascript.png">
 

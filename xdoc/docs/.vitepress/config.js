@@ -52,7 +52,7 @@ module.exports = {
         items: [
           { text: 'Express',link: '/other/express' },
           { text: 'Gitee',link: '/other/git的使用体验' },
-          { text: 'Typescript',link: '/other/typescript' },
+          { text: 'Typescript',link: '/other/typescript/index' },
           { text: 'Less',link: '/other/less的使用' },
           { text: 'Mysql',link: '/other/mysql' },
           { text: 'Nvm',link: '/other/nvm' }
@@ -180,6 +180,16 @@ module.exports = {
             { text: 'index', link: '/javascript/es6/index' },
             { text: 'ES6+', link: '/javascript/es6/ES6+' },
             { text: 'Promise', link: '/javascript/es6/Promise' },
+          ]
+        }
+      ],
+      '/other/typescript': [
+        {
+          text: 'Typescript',
+          items: [
+            { text: 'index', link: '/other/typescript/index' },
+            { text: '认识typescript', link: '/other/typescript/认识typescript' },
+            { text: 'typescript语法', link: '/other/typescript/typescript语法' },
           ]
         }
       ]
