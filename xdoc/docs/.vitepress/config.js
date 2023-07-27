@@ -178,6 +178,8 @@ module.exports = {
           text: 'ES6-6+',
           items: [
             { text: 'index', link: '/javascript/es6/index' },
+            { text: 'ES6+', link: '/javascript/es6/ES6+' },
+            { text: 'Promise', link: '/javascript/es6/Promise' },
           ]
         }
       ]
