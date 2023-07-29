@@ -14,12 +14,12 @@ nvm use 版本号  ## 启用对应的版本
 nvm uninstall 版本号 卸载删除对应的版本
 ```
 ### 4.npm配置镜像源（淘宝镜像）
-```
+```sh
 npm config set registry https://registry.npm.taobao.org
 ```
 
 ### 5.vuecli 安装
-```
+```sh
 npm install -g @vue/cli
 vue -V
 @vue/cli 5.0.8

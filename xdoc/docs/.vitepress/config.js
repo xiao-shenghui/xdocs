@@ -45,6 +45,7 @@ module.exports = {
           { text: 'Axios',link: '/tool/axios/index' },
           { text: 'Element-Ui',link: '/tool/element-ui/index' },
           { text: 'jQuery',link: '/tool/jquery/jQuery' },
+          { text: 'Nodejs',link: '/tool/nodejs' },
         ]
       },
       {

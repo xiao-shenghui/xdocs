@@ -134,7 +134,7 @@ tag表示虚拟节点对应的组件的标签名。
 
 - 虚拟节点的组件选项`(componentOptions)`
 
-```text
+```html
 组件的标签名componentOptions是一个组件选项对象，它包含了组件的各种选项和属性。
 componentOptions对象具有以下属性：
   propsData：一个包含了组件实例的初始props数据的对象。

@@ -14,7 +14,7 @@ cd my-app #进项目里面
 npm start #运行项目
 ```
 - 用VSCode打开项目
-```text
+```html
 <!-- 目录结构 -->
 - node_modules/
 - public/

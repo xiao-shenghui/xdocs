@@ -577,7 +577,7 @@ class Father extends React.Component{
 }
 ```
 
-### 子-父组件通讯
+## 子-父组件通讯
 > React中，子向父传递数据，采用`回调函数`的机制.  
 > 父亲传一个值为`回调函数`的props(带形参)，接收或者操作子组件传递的数据。
 ```js
@@ -598,9 +598,9 @@ myFn(123,callBack);
 > 子组件中接收这个props, 直接使用,或者触发个自己的方法来调用执行这个props.
 > 子组件往父组件传过来的props方法里,传入实参.
 > 父组件就可以使用了.
-## 函数组件
+### 函数组件
 > 和类组件机制一样，不展开。
-## 类组件
+### 类组件
 ```jsx
 class App extends React.Component{
 	constructor(){
@@ -633,3 +633,387 @@ class Footer extends React.Component{
 	}
 }
 ```
+
+## 跨组件通讯
+> 爷爷组件和孙子组件通讯，兄弟组件通讯，都称之为`跨组件通讯`。
+### 层层传递
+> 爷孙：爷爷先将数据传递给父组件，父组件接收到后，传递给子组件
+> 兄弟：儿子传递数据给父组件(子父通讯props方法)，  
+> 父组件用state保存起来，传递个另一个兄弟组件(父子通讯 props)
+- 爷孙通讯：
+```jsx
+// 爷爷组件: 传递一个name属性
+class App extends React.Component {
+  render() {
+    return (
+      <>
+        <p>我是爷爷组件</p>
+        <Father name="123" />
+      </>
+    )
+  }
+}
+
+// 父亲组件: 接收props的name属性
+class Father extends React.Component {
+  // constructor(props){
+  // 	super(props) //接收App的props
+  // } //react18 不再需要使用constructor来继承props,直接使用
+  render() {
+    return (
+      <>
+        <p>我是父亲组件</p>
+        <Son fname={this.prpps.name} />
+      </>
+    )
+  }
+}
+
+// 儿子组件: 接收父亲传的fname属性
+class Son extends React.Component {
+  // constructor(props){
+  // 	super(props) //接收Father的props
+  // } //react18 不再需要使用constructor来继承props,直接使用
+  render() {
+    return (
+      <>
+        <p>我是儿子组件 {this.props.fname}</p>
+      </>
+    )
+  }
+}
+```
+- 兄弟通讯:
+```jsx
+class Son1 extends React.Component {
+  // constructor(props){
+  //    super(props)
+  // }  react18 不再需要使用constructor来继承props,直接使用
+  render() {
+    return (
+      <>
+        <p>我是儿子1组件</p>
+        <button onClick={() => { this.sonClick() }}>点击传递</button>
+      </>
+    )
+  }
+  sonClick() {
+    this.props.fn('你好');
+    // 传入 '你好'
+  }
+}
+
+class Son2 extends React.Component {
+  // constructor(props){
+  //  super(props)
+  // } //react18 不再需要使用constructor来继承props,直接使用
+  render() {
+    return (
+      <>
+        <p>我是儿子2组件 {this.props.mesg}</p>
+      </>
+    )
+  }
+}
+
+
+
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      message: ''
+    }
+  }
+  render() {
+    return (
+      <>
+        <p>我是父组件组件</p>
+        <Son1 fn={(msg) => { this.sayHello(msg) }} />
+        <Son2 mesg={this.state.message} />
+      </>
+    )
+  }
+  sayHello(msg) {
+    // 父组件接收到数据后，保存起来，发送给另一个子组件。
+    this.setState({ message: msg });
+    console.log(msg)
+  }
+}
+```
+
+### context
+> 如果传递数据层次太深，层层传递太麻烦  
+> React提供了其他的解决方案
+- 跨组件通讯的方案：
+	- 通过context上下文通讯
+	- 通过Redux传递（相当于VueX）
+	- 通过Hooks传递（相当牛X）
+- context的使用
+	- 1. 创建context对象: 通过`React.createContext()`创建
+	- 2. 从context对象中，获取`容器组件`(解构出`{Provider,Consumer}`)
+		- 2.1 Provider: `生产者`容器组件，专门负责生产数据, 
+			- 使用value属性生产。
+		- 2.2 Consumer: `消费者;`容器组件，专门负责消费Provider生产的数据,
+			- 使用函数返回JSX,函数传入value, JSX里面用value.xxx取出数据
+		- 2.3 容器组件： 专门用于`包裹`项目中的组件，是一个特殊的组件。
+		- 2.4 如何使用？`将需要生产数据或者消费数据的组件`，用context中的`容器组件`包裹。
+
+- Provider组件的使用:
+```jsx
+// 1. 通过React的createContext方法，创建context对象
+	// 创建的时候，可以定义context默认数据。
+let contextApp = React.createContext({
+	name: '知播鱼'，
+	age: 18
+});
+// 这些默认数据，通过添加: 组件名.contextType = contextApp, 
+	// 后面就可以统一通过 this.context.xxx 获取
+// 2. 解构出生产者，消费者容器组件
+let {Provider, Consumer} = contextApp;
+// 3. 根据生产，消费的情境，包裹相关组件
+	// 3.1 用Provider包裹最大的父组件(供后续子组件使用)，用value属性提供数据
+	// 3.2 在要用数据的地方，用Consumer组件，内部放一个函数，参数是value, 
+	// return出相关数据，用value.xxx获取
+class App extends React.Component {
+	// 申明静态变量contextTpe, 将context直接赋值于contextType
+	// 后续可以使用this.context.xxx获取默认数据
+  static contextType = contextApp
+  render() {
+    return (
+      <>
+        <p>我是父组件组件</p>
+        <h1>{this.context.name}</h1>
+        <>
+        {/*在Provider生产者容器中，通过value生产数据，生产的数据，在包裹的组件内可以使用*/}
+        <Provider value={{name: 'wc'}}>
+        	<Father />
+        </Provider>
+      </>
+    )
+  }
+}
+```
+- Consumer组件的使用:
+```jsx
+class Father extends React.Component {
+  // 申明静态变量、contextType 将 context 直接赋值于 contextType
+  // 后续可以使用this.context.xxx获取默认数据
+  static contextType = contextApp
+  render() {
+    return (
+      <>
+        <p>我是父组件组件</p>
+        {/*在要使用数据的地方，使用Consumer组件，用函数的形式返回数据
+			必须渲染一个函数，函数的参数就是Context得值
+        */}
+        <Consumer>
+        	{
+        		(value) => {
+        			return (
+        				<div>{value.name}</div>
+    				)
+        		}
+        	}
+        </Consumer>
+      </>
+    )
+  }
+}
+```
+
+
+### 不解构的写法
+```js
+// 将context的创建，放到一个js文件上。
+// AppContext.js
+import {createContext} from 'react'
+const AppContext = React.createContext();
+export default AppContext
+```
+```jsx
+import AppContext from './AppContext.js'
+class Father extends React.Component{
+	render(){
+		return (
+			<>
+				<AppContext.Provider value={{name: "wc", age: 18}}>
+					<Son />
+				</AppContext.Provider>
+				<h1>我是父组件</h1>
+			</>
+		)
+	}
+}
+```
+```jsx
+import AppContext from './AppContext.js'
+class Son extends React.Component{
+	render(){
+		return(
+			<div>
+				<AppContext.Consumer>
+					{
+						(value) => {
+							return (
+								<>
+									<p>{value.name}</p>
+									<p>{value.age}</p>
+								</>
+							)
+						}
+					}
+				</AppContext.Consumer>
+			</div>
+		)
+	}
+}
+```
+
+### 第三方库events
+> 这个库，会把所有提交的事件，保存到事件管理对象，供任何组件触发来发送数据。  
+> 接收数据: 使用`events.addListener`注册一个事件(事件名和回调函数)，用于接收数据。  
+> 发送数据: 使用`events.emit`触发相应的事件。传入数据。
+- 安装events库
+```sh
+npm install events
+```
+- 导入并且使用events库的方法
+```js
+import {EventEmitter} from 'events'
+```
+- 用它的`EventEmitter`方法，在全局创建一个`全局事件管理对象`
+```js
+// 在main.js创建
+const eventBus = new EventEmitter();
+```
+- 传输数据(回调函数形式)
+- 例如：A传输数据给B
+	- B:  接收数据方，添加事件监听。 `eventBus.addListener('要提交的事件名', callBack)`,
+	- 使用`addListener方法`，添加一个回调函数到`eventBus`上。
+	- A: 传输数据方，`eventBus.emit('要触发的事件名',传输的数据1，数据2，数据3)`, 
+	- 触发接收数据的回调函数，传入数据。
+
+- 完整案例：
+> Father类组件，通过eventBus传递数据给App
+```jsx
+import { EventEmitter } from 'events'
+const eventBus  = new EventEmitter()
+
+class App extends React.Component{
+	// 类组件的生命周期函数，组件渲染完毕自动调用
+	componentDidMount(){
+		// 要接收数据了，提交一个回调函数 addListener
+		eventBus.addListener('msg', this.msgFn.bind(this))
+	}
+	//为性能考虑，当注册事件(要接收数据的)的组件被卸载时，把相应的事件移除。
+	//eventBus.removeListener('事件别名', 回调函数) 
+	// componentWillUnmount(){}
+	componentWillUnmount(){
+		eventBu.removeListener('msg', this.msgFn.bind(this));
+	}
+	render(){
+		return(
+			<>
+				<p>我是父组件</p>
+			</>
+			)
+	}
+
+	msgFn(m,n){
+		console.log(m,n)
+	}
+}
+```
+```jsx
+class Father extends React.Component{
+	render(){
+		return(
+			<>
+				<button onClick= () => {  }>发送数据</button>
+			</>
+			)
+	}
+	sendMsg(){
+		// 要发送数据
+		// 触发全局事件管理器对象内管理的相应方法，emit('方法名', 数据)
+		eventBus.emit('msg', 'wc', '18');
+	}
+}
+```
+
+### events注意点
+> 为了性能考虑，如果使用eventBus来实现跨组件通讯，  
+> 应该在组件被卸载的时候，将事件移出掉。
+```jsx
+// 涉及的生命周期函数： 
+	// 注册时: componentDidMount(){} 卸载时: componentDidWillUnmount(){}
+```
+
+## props和state
+- 相同点：都是用来存储数据的
+- 不同点：
+	- props是只读的，无法修改。
+	- state是可读可写的，但是必须调用setState修改，才能触发视图同步更新。
+
+### setState 异步和合并
+```js
+constructor(){
+	super();
+	this.state = {
+		age: 18
+	}
+}
+
+/*
+	1. 默认情况下，setState是异步的
+	2. 为什么要设计为异步的？ 优化性能，因为每次调用setState都会更新UI
+	收集一段时间内的修改，然后统一一次性更新UI界面。
+	3. 如何拿到更新后的数据？
+	setState 可以接收2个参数，第二个参数是数据更新后执行的回调函数。
+	4. setState 一定是异步的吗？
+	不一定：在定时器中触发，原生事件中触发，是同步的
+*/
+btnClick(){
+	// this.setState({
+	// 	age: 111
+	// })
+	// this.setState({
+	// 	age: 222
+	// })
+	// this.setState({
+	// 	age: 333 //只渲染最后一次
+	// })
+	// console.log(this.state.age) //打印修改之前的18，异步函数。
+
+	// 接收2个参数，第二个参数是数据更新后执行。
+	// this.setStata({
+	// 	age: 333
+	// }, () => {
+	// 	console.log(this.state.age); //打印333
+	// })
+
+	// 定时器中，setState是同步的
+	setTimeout(() => {
+		this.setState({
+			age: 333
+		});
+		console.log(this.state.age); //打印333
+	}, 0);
+}
+```
+```jsx
+// 在原生事件中，注册事件，使用setState()
+class App extends React.Component{
+	componentDidMount(){
+		const oBtn = document.getElementById('btn');
+		oBtn.onclick = () => {
+			this.setState({
+				age: 666
+			});
+			console.log(this.state.age); //打印666
+		}
+	}
+}
+```
+

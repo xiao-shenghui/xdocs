@@ -222,7 +222,7 @@ app.get('/',(req,res)=>{
 //render方法的第二个参数可以携带一些动态参数
 app.get('',(req.res)=>{
 	res.render('index',{name: 'jackie',age: 18});
-});
+};
 ```
 ```html
 <!-- index.hbs -->
@@ -232,7 +232,7 @@ app.get('',(req.res)=>{
 ### 静态文件服务
 Express自带了静态文件服务的中间件：express.static,使用起来非常方便
 - 假设我们的静态资源在public下面：
-```text
+```html
 public
  ---css
  	---style.css
@@ -244,7 +244,7 @@ public
 app.use(express.static('public'));
 ```
 - 在前台页面就可以直接访问到了这些资源了：
-```text
+```html
 http://localhost:3000/css/style.css
 http://localhost:3000/img/logo.png
 ```

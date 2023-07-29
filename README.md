@@ -19,6 +19,9 @@
   - index.md 首页
 
 ## 最新效果图
+- Nodejs
+<img src="./mdImg/nodejs.png">
+
 - ES6和Promise
 <img src="./mdImg/ES6和Promise.png">
 
