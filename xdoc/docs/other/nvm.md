@@ -1,6 +1,6 @@
 ## nvm 使用
 ### 1.下载安装包：
-- [GitHub安装包](`https://github.com/coreybutler/nvm-windows/releases`)
+- GitHub安装包
 - 找到 Assets列表里的**nvm-setup.exe**,双击下载
 ### 2.安装exe文件
 - 一路点击**下一步**

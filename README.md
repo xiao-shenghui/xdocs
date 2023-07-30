@@ -1,6 +1,7 @@
 ## 一些日志
 - 博客模板: vitepress  
-- [vitepress官方网址]: (https://vitepress.dev/reference/)
+- vitepress [官方网址]: (https://vitepress.dev/reference/)
+- 已经打包上线, [预览网址]: (https://xdocs.gscyjsq.top/)
 - 博客搭建工具: npm, cnpm, markdown
 - vitepress优势: 
   - vite工具搭建,

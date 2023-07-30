@@ -67,4 +67,3 @@ export default App;
   学习React-中文文档
 </a>
 ```
-<img src="./mdImg/creat-react-app-first.png">

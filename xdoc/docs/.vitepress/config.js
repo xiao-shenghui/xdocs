@@ -142,9 +142,9 @@ module.exports = {
           text: 'ElementUI',
           items: [
             { text: 'index', link: '/tool/element-ui/index' },
-            { text: 'el-row及el-col源码', link: '/tool/element-ui/el-row及el-col源码' },
-            { text: 'el-container源码', link: '/tool/element-ui/el-container源码' },
-            { text: 'el-radio源码', link: '/tool/element-ui/el-radio源码' },
+            { text: 'el-row及el-col源码', link: '/tool/element-ui/el-row+el-col' },
+            { text: 'el-container源码', link: '/tool/element-ui/el-container' },
+            { text: 'el-radio源码', link: '/tool/element-ui/el-radio' },
           ]
         }
       ],
