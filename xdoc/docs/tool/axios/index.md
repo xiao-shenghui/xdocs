@@ -1,9 +1,9 @@
 ---
 next:
-  text: 'axios基本使用'
-  link: './axios基本使用'
+  text: 'axios-basic'
+  link: './axios-basic'
 ---
 
 ## 导航目录
-- [axios基本使用](./axios基本使用)
-- [axios拦截器](./axios拦截器)
+- [axios基本使用](./axios-basic)
+- [axios拦截器](./axios-interceptors)

@@ -1,1 +1,0 @@
-import{_ as s,o as a,c as n,V as l}from"./chunks/framework.b1ba171e.js";const A=JSON.parse('{"title":"NodeJs","description":"","frontmatter":{},"headers":[],"relativePath":"tool/nodejs.md","filePath":"tool/nodejs.md"}'),o={name:"tool/nodejs.md"},p=l("",21),e=[p];function r(t,c,F,D,y,i){return a(),n("div",null,e)}const C=s(o,[["render",r]]);export{A as __pageData,C as default};

@@ -20,6 +20,9 @@
   - index.md 首页
 
 ## 最新效果图
+- 打包上线展示
+<img src="./mdImg/online.png">
+
 - Nodejs
 <img src="./mdImg/nodejs.png">
 
