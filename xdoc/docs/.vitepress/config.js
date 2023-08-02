@@ -52,6 +52,7 @@ module.exports = {
         text: '杂七杂八',
         items: [
           { text: 'Express',link: '/other/express' },
+          { text: 'Koa',link: '/other/koa' },
           { text: 'Gitee',link: '/other/git' },
           { text: 'Typescript',link: '/other/typescript/index' },
           { text: 'Less',link: '/other/less' },
