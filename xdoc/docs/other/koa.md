@@ -462,3 +462,153 @@ router.get('/captcha', async ctx => {
 app.use(router.routes())
 app.listen(3000)
 ```
+
+
+## 鉴权
+> 常见的鉴权方式：cookies鉴权，session鉴权(基于cookies)，jwt+token鉴权。
+### cookies鉴权
+> 访问请求时，给前端设置一个cookies, 并且可以读取前端的cookies.
+```js
+const Koa = require('koa')
+const Router = require('@koa/router')
+const app = new Koa()
+const router = new Router()
+// 设置cookies的路由
+router.get('/login', ctx => {
+    // cookie鉴权
+    // 第一个参数是属性名 第二个是属性值 第三个参数是配置信息
+    ctx.cookies.set('username', 'malu', {
+        maxAge: 10000,//存活时间 以毫秒为单位
+    })
+    ctx.body = '登录成功'
+})
+
+// 鉴权cookies的路由
+router.get('/detail', ctx => {
+    if (ctx.cookies.get('username')) {
+        ctx.body = {
+            msg: "这是具体信息"
+        }
+    } else {
+        ctx.body = {
+            msg: "请登录"
+        }
+    }
+})
+app.use(router.routes())
+app.listen(3000)
+```
+- 统计网站访问次数
+```js
+const Koa = require('koa')
+const Router = require('@koa/router')
+const app = new Koa()
+const router = new Router()
+router.get('/login', ctx => {
+    let times = 0;
+    if (ctx.cookies.get('times')) {
+        times = ctx.cookies.get('times')
+    }
+    times++
+
+    let lastTime = ctx.cookies.get('lastTime')
+    ctx.cookies.set('lastTime', new Date().toLocaleString(), {
+        maxAge: 60000 * 24 * 24,//存活时间 以毫秒为单位
+    })
+    ctx.cookies.set('times', times, {
+        maxAge: 60000 * 24 * 24,//存活时间 以毫秒为单位
+    })
+    if (!lastTime) {
+        ctx.body = '这是你今天第一次访问'
+    } else {
+        ctx.body = `登录成功，这是你今天第${times}访问，上一次的访问时间是${lastTime}`;
+    }
+})
+app.use(router.routes())
+app.listen(3000)
+```
+### session鉴权
+> 引入插件，`koa-session`,  
+> 使用`session()`方法，将cookies加密一下，再返回给前端的cookies.
+
+```js
+const Koa = require('koa')
+const Router = require('@koa/router')
+const session = require('koa-session')
+const app = new Koa()
+const router = new Router()
+
+
+// 添加加密签名
+app.keys = ['some secret hurr'];
+// 定义加密配置项
+const CONFIG = {
+    key: 'koa.sess', //相当于你要存储到cookie里面的属性名
+    maxAge: 86400000,//有效期
+    httpOnly: true, //表示只有服务器可以修改
+    signed: true, //签名cookie
+};
+
+// 设置中间件，所有请求过来的内容，都会被session加密一下。
+app.use(session(CONFIG, app));
+// 将上面的配置信息和加密签名与session组件 产生联系
+
+router.get('/login', ctx => {
+    // 现在你的真实数据 存在服务器
+    console.log(ctx.session.count);
+    if (ctx.session.count) {
+        ctx.session.count++
+    } else {
+        ctx.session.count = 1
+    }
+    ctx.body = `这是你第${ctx.session.count}次访问`
+})
+app.use(router.routes())
+app.listen(3000)
+```
+
+### JWT+Token鉴权
+> 使用第三方插件`jsonwebtoken(JWT)`加密生成Token, 并且使用`koa-jwt`加息Token  
+> 更加安全，并且不会保存到cookies中
+```js
+const Koa = require('koa')
+const Router = require('@koa/router')
+const bodyParser = require('koa-bodyparser')
+const jwt = require('jsonwebtoken');//加密
+const jwtAuth = require('koa-jwt')//解密
+const app = new Koa()
+const router = new Router()
+app.use(bodyParser())
+
+
+//添加秘钥(非常重要)
+const secret = 'some secret hurr';
+
+// 使用jsonwebtoken包 的 jwt.sign生成加密密钥
+router.post('/login', ctx => {
+    // 此时我们要根据信息和秘钥生成一个加密字符串
+    let { body } = ctx.request;
+    // 生成加密字符串 也就是我们的token
+    let token = jwt.sign({
+        data: body,//加密数据 这里最好不要放敏感数据,
+        // 设置一个过期时间 是指具体的时间 不是时间段 这里面的单位是秒
+        exp: Math.floor(Date.now() / 1000) + 60 * 60
+        // 这就表示 这个token有效期是一小时
+    }, secret)
+    ctx.body = {
+        code: 1,//实际上就是前端用于区分情况的一个编码
+        msg: "登录成功",
+        token
+    }
+})
+
+// 使用koa-jwt包 的 jwtAuth解析加密密钥
+router.get('/list', jwtAuth({ secret }), ctx => {
+    ctx.body = {
+        // 加密的数据都在这里
+        detail: ctx.state.user.data
+    }
+})
+app.use(router.routes())
+app.listen(3000)
+```
