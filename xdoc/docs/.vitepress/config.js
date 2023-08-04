@@ -58,7 +58,8 @@ module.exports = {
           { text: 'Typescript',link: '/other/typescript/index' },
           { text: 'Less',link: '/other/less' },
           { text: 'Mysql',link: '/other/mysql' },
-          { text: 'Nvm',link: '/other/nvm' }
+          { text: 'Nvm',link: '/other/nvm' },
+          { text: '瀑布流布局',link: '/other/waterfall' }
         ]
       },
       { text: '配置网站', link: 'https://vitepress.dev/reference/default-theme-nav' },

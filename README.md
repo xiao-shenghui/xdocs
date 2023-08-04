@@ -1,7 +1,6 @@
 ## 一些日志
 - 博客模板: vitepress  
 - vitepress [官方网址]: (https://vitepress.dev/reference/)
-- 已经打包上线, [预览网址]: (https://xdocs.gscyjsq.top/)
 - 博客搭建工具: npm, cnpm, markdown
 - vitepress优势: 
   - vite工具搭建,
@@ -20,6 +19,9 @@
   - index.md 首页
 
 ## 最新效果图
+- 新增`响应式瀑布流布局`文档
+<img src="./mdImg/waterfall.png">
+
 - 新增koa文档
 <img src="./mdImg/koa.png">
 
