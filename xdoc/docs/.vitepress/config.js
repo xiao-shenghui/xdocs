@@ -7,6 +7,8 @@ module.exports = {
   themeConfig: {
     // 网页标题
     siteTitle: 'XDocs',
+    // 指定大纲的层级
+    outline: 'deep',
     // 配置导航栏nav
     nav: [
       // text 标题
@@ -70,7 +72,7 @@ module.exports = {
       '/vue/vue2': [
         {
           text: 'Vue2',
-          collapsed: true,
+          // collapsed: true,
           // items,子级
           items: [
             { text: '导航目录', link: '/vue/vue2/index' },
@@ -86,17 +88,18 @@ module.exports = {
       '/vue/vue3': [
         {
           text: 'Vue3',
-          collapsed: true,
+          // collapsed: true,
           // items,子级
           items: [
-            { text: '导航目录', link: '/vue/vue3/index' }
+            { text: '导航目录', link: '/vue/vue3/index' },
+            { text: 'vue3基础', link: '/vue/vue3/basic' }
           ]
         }
       ],
       '/vue/vue-router': [
         {
           text: 'Vue-Router',
-          collapsed: true,
+          // collapsed: true,
           // items,子级
           items: [
             { text: '导航目录', link: '/vue/vue-router/index' },
@@ -108,7 +111,7 @@ module.exports = {
       '/vue/vuex': [
         {
           text: 'VueX',
-          collapsed: true,
+          // collapsed: true,
           // items,子级
           items: [
             { text: '导航目录', link: '/vue/vuex/index' },
@@ -118,7 +121,7 @@ module.exports = {
       ],
       '/react/jsx': [
         {
-          text: 'JSX', link: '/react/jsx'
+          text: 'JSX', link: '/react/jsx/JSX'
         }
       ],
       '/react/react18': [
