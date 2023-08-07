@@ -1093,4 +1093,35 @@ const { address,handleFn } = inject('all');
 </script>
 ```
 
+
 ### 异步组件
+> 异步组件: 当需要该组件时，才从服务器请求组件。  
+> vue3中使用`defineAsyncComponent`实现异步组件，该方法接收一个返回`Promise`的加载函数。  
+> 由于`ES模块动态导入`(`import()函数`)也会返回一个Promise, 因此常常和其一起使用
+```js
+// 原理
+import { defineAsyncComponent } from 'vue'
+
+const AsyncComp = defineAsyncComponent(() => {
+  return new Promise((resolve, reject) => {
+    // ...从服务器获取组件
+    resolve(/* 获取到的组件 */)
+  })
+})
+// ... 像使用其他一般组件一样使用 `AsyncComp`
+```
+- 配合ES6模块导入一起使用
+- 局部组件
+```js
+// 配合ES6模块动态导入一起使用
+import { defineAsyncComponent } from 'vue'
+
+const AsyncComp = defineAsyncComponent(() =>
+  import('./components/MyComponent.vue')
+)
+```
+- 全局组件
+> 异步组件也可以像普通组件一样，使用`app.component`全局注册:
+```js
+app.component('MyComponent', defineAsyncComponent(()=> import('./components/MyComponent.vue') ))
+```
