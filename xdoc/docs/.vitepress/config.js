@@ -92,7 +92,8 @@ module.exports = {
           // items,子级
           items: [
             { text: '导航目录', link: '/vue/vue3/index' },
-            { text: 'vue3基础', link: '/vue/vue3/basic' }
+            { text: 'vue3基础', link: '/vue/vue3/basic' },
+            { text: 'vue3深入', link: '/vue/vue3/deep' }
           ]
         }
       ],
