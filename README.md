@@ -19,6 +19,9 @@
   - index.md 首页
 
 ## 最新效果图
+- 新增`npm包推荐`文档
+<img src="./mdImg/npm-recommend.png">
+
 - 新增`vue3`文档, 设置`深层次目录`大纲
 <img src="./mdImg/vue3.png">
 

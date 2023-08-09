@@ -61,7 +61,8 @@ module.exports = {
           { text: 'Less',link: '/other/less' },
           { text: 'Mysql',link: '/other/mysql' },
           { text: 'Nvm',link: '/other/nvm' },
-          { text: '瀑布流布局',link: '/other/waterfall' }
+          { text: '瀑布流布局',link: '/other/waterfall' },
+          { text: 'Npm包推荐',link: '/other/npm-recommend' }
         ]
       },
       { text: '配置网站', link: 'https://vitepress.dev/reference/default-theme-nav' },
