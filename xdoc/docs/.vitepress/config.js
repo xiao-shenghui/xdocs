@@ -82,7 +82,8 @@ module.exports = {
             { text: 'vue插槽', link: '/vue/vue2/vue-slot' },
             { text: 'vue父子数据互传', link: '/vue/vue2/vue-component2' },
             { text: 'vue扩展和插件', link: '/vue/vue2/vue-extend-plugin' },
-            { text: 'vue-render渲染函数', link: '/vue/vue2/vue-render' }
+            { text: 'vue-render渲染函数', link: '/vue/vue2/vue-render' },
+            { text: 'vue笔记总结', link: '/vue/vue2/vue-total' }
           ]
         }
       ],

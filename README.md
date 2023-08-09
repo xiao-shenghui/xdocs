@@ -19,6 +19,9 @@
   - index.md 首页
 
 ## 最新效果图
+- 新增`vue2笔记总结`文档
+<img src="./mdImg/vue-total.png">
+
 - 新增`npm包推荐`文档
 <img src="./mdImg/npm-recommend.png">
 
