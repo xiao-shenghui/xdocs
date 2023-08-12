@@ -18,9 +18,11 @@ module.exports = {
         // items子级下拉框
         text: 'Javascript',
         items: [
+          { text: 'HTML5新增', link: '/javascript/html5/draggable&touch' },
           { text: 'JS基础', link: '/javascript/jsbasic/index' },
           { text: 'JS高级', link: '/javascript/jsdeep/index' },
           { text: 'ES6及6+', link: '/javascript/es6/index' },
+          { text: 'Ajax+', link: '/javascript/Ajax' }
         ]
       },
       {
@@ -160,6 +162,15 @@ module.exports = {
       '/tool/jquery': [
         {
           text: 'jQuery', link: '/tool/jquery/jQuery' 
+        }
+      ],
+      '/javascript/html5': [
+        {
+          text: 'HTML5新增',
+          items: [
+            { text: 'index', link: '/javascript/html5/index' },
+            { text: '拖拽和触摸', link: '/javascript/html5/draggable&touch' }
+          ]
         }
       ],
       '/javascript/jsbasic': [

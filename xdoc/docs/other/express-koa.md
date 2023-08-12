@@ -48,6 +48,41 @@ app.use((req,res, next) => {
 
 // 1，2，5，7，6
 ```
+## 定义中间件
+> 以一个鉴权的案例，检测所有路由都要带`token`键。
+```js
+// post请求
+const express = require('express');
+const router = express.Router();
+const app = express();
+const key = require('../config.js')
+// 解析post请求体
+app.use(express.urlencoded({
+  extended: false
+}));
+
+// 对自定义的token进行鉴权
+const check = (res,req,next)=>{
+	const {token} = res.body;
+	if(token == key){
+		next()
+	}
+	else{
+		req.send({
+			code: 0,
+			msg: "请携带正确的token"
+		})
+	}
+}
+
+// 定义分级路由
+router.post('/explore', check, (res,req)=>{
+	req.send("explore router is ok")
+});
+
+module.exports = router;
+```
+
 ## 路由
 > express 自带路由对象构造器，只需要使用即可。
 ```js
@@ -132,6 +167,12 @@ req.params.id = 243654646467
 // 普通键值对和复杂json
 // 接口：'/'
 req.body
+/*
+app.use(express.json()); 
+//post解析application/json类型的请求体。
+express.urlencoded()
+//post解析application/x-www-form-urlencoded类型的请求体。
+*/
 ```
 ## 实现登录检验功能
 > 和koa实现中，逻辑基本一样。
@@ -158,7 +199,9 @@ const path = require('path')
 const express = require('express')
 const app = express()
 
-express.static(path.join(__dirname, './public'))
+// 静态资源托管,使用app.use,配合express.static方法
+// 设置路由为'http://localhost:3000/static/'
+app.use('/static',express.static(path.join(__dirname, './public')))
 // ...
 app.listen(3000)
 ```
