@@ -20,10 +20,10 @@
   // global.Vue = factory()
   // 因此可以直接使用Vue.xxx方法。
   // new Vue 就是 new factory();
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-      (global.Vue = factory());
-}(this, (function () {
+typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+    (global.Vue = factory());
+}(this, (function () {...}
 ```
 
 ## 工具函数
@@ -51,13 +51,13 @@
    *            如果传入字符串, 代表前10个字母占据"缩进"的位置.             
    *  val不是引用类型的, 返回String转换后的字符串.
    */
-  function _toString(val) {
-    return val == null
-      ? ''
-      : typeof val === 'object'
-        ? JSON.stringify(val, null, 2)
-        : String(val)
-  }
+function _toString(val) {
+  return val == null
+    ? ''
+    : typeof val === 'object'
+      ? JSON.stringify(val, null, 2)
+      : String(val)
+}
 ```
 
 ### toNumber
@@ -80,22 +80,22 @@
    *    //利用isNaN判断是否转换失败,失败就直接返回原值.  
    *  };
    */
-  function toNumber(val) {
-    var n = parseFloat(val, 10)
-    return (n || n === 0) ? n : val
-  }
+function toNumber(val) {
+  var n = parseFloat(val, 10)
+  return (n || n === 0) ? n : val
+}
 ```
 
 ### makeMap
 > 用于返回一个函数, 用于`判断`某个`字符`(是否在`源字符串中`).支持转小写再判断。   
-> 核心是使用`Object.create(null)`创建纯净的空对象`map`，  
+> 核心是使用`Object.create(null)`创建纯净的空对象`map`，    
 > 将`源字符串`转数组，每项作为`键`添加到`map`内, `键值`为`true`, 根据参数决定是否转小写。  
 > 早期实现的类似于`map类型功能`的方法，`map对象`。
 ```js
 /**
    * Make a map and return a function for checking if a key
    * is in that map.
-   * 定义一个makeMap方法, 用于返回一个用于判断(是否在源字符串中)的匿名函数, 
+   * 定义一个makeMap方法, 用于返回一个用于判断(是否在源字符串中)的函数, 
    * 该函数传参个字符后, 可以判断参数是否在源字符串中.
    * (支持转小写再判断)
    * 用法: 
@@ -137,10 +137,20 @@
    */
   var isBuiltInTag = makeMap('slot,component', true)
   // isBuiltInTag('slot') ==== true
+
+  // vue3中依然保留了这个函数，返回时更加严谨, 加!!双重转换为布尔值。
+  function makeMap(str, expectsLowerCase) {
+      const map = Object.create(null);
+      const list = str.split(',');
+      for (let i = 0; i < list.length; i++) {
+          map[list[i]] = true;
+      }
+      return expectsLowerCase ? val => !!map[val.toLowerCase()] : val => !!map[val];
+  }
 ```
 
 ### remove$1
-> 用于移除数组中，选定项的方法，影响原数组。  
+> 用于移除数组中，选定项的方法，影响原数组。    
 > 核心是使用`indexOf`和`splice`
 ```js
 /**
@@ -167,20 +177,20 @@
 > 为何要`借用`? 自己也有。 因为自己的容易被修改。
 ```js
 /**
-   * Check whether the object has the property.
-   * 判断key是否为obj的私有属性.
-   * hasOwnProperty.call(obj, key),
-   *   调用 Object.prototype.hasOwnProperty(key) 
-   *   利用call改变this, 也就是调用的Object的原型对象上的方法, this指回自己.
-   *   并不等价于 obj.hasOwnProperty(key); 
-   *   一个是共享方法(不易被修改),一个是私有属性.
-   * 这样转弯写?? 
-   *   目的是防止: 后面修改了或者已经定义了obj自己的hasOwnProperty方法.
-   */
-  var hasOwnProperty = Object.prototype.hasOwnProperty
-  function hasOwn(obj, key) {
-    return hasOwnProperty.call(obj, key)
-  }
+ * Check whether the object has the property.
+ * 判断key是否为obj的私有属性.
+ * hasOwnProperty.call(obj, key),
+ *   调用 Object.prototype.hasOwnProperty(key) 
+ *   利用call改变this, 也就是调用的Object的原型对象上的方法, this指回自己.
+ *   并不等价于 obj.hasOwnProperty(key); 
+ *   一个是共享方法(不易被修改),一个是私有属性.
+ * 这样转弯写?? 
+ *   目的是防止: 后面修改了或者已经定义了obj自己的hasOwnProperty方法.
+ */
+var hasOwnProperty = Object.prototype.hasOwnProperty
+function hasOwn(obj, key) {
+  return hasOwnProperty.call(obj, key)
+}
 ```
 
 ### isPrimitive
@@ -188,17 +198,18 @@
 > 核心是使用`typeof`
 ```js
 /**
-   * Check if value is primitive
-   * 检查值是否为原始简单类型。(string和number)
-   */
-  function isPrimitive(value) {
-    return typeof value === 'string' || typeof value === 'number'
-  }
+ * Check if value is primitive
+ * 检查值是否为原始简单类型。(string和number)
+ */
+function isPrimitive(value) {
+  return typeof value === 'string' || typeof value === 'number'
+}
 ````
 
 ### cached
 > 一个使用`函数闭包`实现`缓存`的方法。   
-> 实际是使用`对象`的`键`或者`键值`是否存在实现的,存在时就不执行函数了，从对象中取。  
+> 实际是使用`对象`的`键`或者`键值`是否存在实现的,  
+> 存在时就不执行函数了，从对象中取。  
 - 核心是创建纯净对象`cache`。
 	- 支持传入`fn`作为回调函数，`str`作为回调函数的实参。
 - 根据`实参`判断是否为对象内的键，决定是否存入作为缓存。 
@@ -252,8 +263,8 @@
 
 ### camelize
 > 将`连字符`形式的字符串转为`驼峰命名`形式  
-> 同时调用`cached()`将结果缓存起来。
-> 核心是`正则匹配`和`str.replace()`的第`2`个参数的功能。
+> 同时调用`cached()`将结果缓存起来。  
+> 核心是`正则匹配`和`str.replace()`的第`2`个参数的功能。  
 - 第`2`个参数(replacement) 接收字符串或函数
 	- 字符串: 替换的字符串
 	- 特殊匹配模式: `$n`, $表示正则匹配的次数，插入第n个捕获组(n<100)
@@ -299,7 +310,7 @@ return str.replace(camelizeRE,
 ```
 
 ### capitalize
-> 首字母转大写，并且带缓存。
+> `首字母转大写`，并且带缓存。
 ```js
 /**
 * Capitalize a string.
@@ -307,6 +318,252 @@ return str.replace(camelizeRE,
 * 取第1个转大写，其余截出来，拼接即可。
 */
 var capitalize = cached(function (str) {
-return str.charAt(0).toUpperCase() + str.slice(1)
+  return str.charAt(0).toUpperCase() + str.slice(1)
 })
 ```
+
+### hyphenate
+> 将`驼峰命名`的字符串，转换为`小写且连字符`格式  
+> 核心是利用`正则匹配`和`replace()`第二个参数的`$n`匹配
+```js
+/**
+   * Hyphenate a camelCase string.
+   * 匹配A-Z的字符，或者A-Z字符前一个别的字符，如A和sA
+   * 测试正则的功能：string.match() 
+   * 'AdsBaArA'.match(/([^-])([A-Z])/g); 返回['sB', 'aA', 'rA']
+   * $1-$2 表示匹配组，-表示连字符，也就是匹配组之间加-
+   * BdsaAdsCadsadas ----> 转为 bdsa-ads-cadsadas
+   * 没有看懂为何要加两层replace.
+   */
+var hyphenateRE = /([^-])([A-Z])/g
+var hyphenate = cached(function (str) {
+  // replace中，第二个参数为字符串的特殊情况，$n
+  // $1-$2表示匹配的1组和2组之间，插入-
+  return str
+    .replace(hyphenateRE, '$1-$2')
+    .replace(hyphenateRE, '$1-$2')
+    .toLowerCase()
+})
+```
+
+### bind$1
+> 一个号称性能更好的`bind`函数  
+> 兼容`老版本浏览器`不支持原生`bind`。  
+> 性能优化: 据说参数多时，使用`apply`，参数少时，使用`call`性能更好。  
+> 核心是根据参数，函数调用call和apply实现改变this.
+```js
+/**
+* Simple bind, faster than native
+* 更简单的bind，比原生更快. 函数的形式调用, 并且能达到call/apply的效果。
+* 兼容了老版本浏览器不支持原生的bind函数。
+* 用法：bind$1(fn, targetObj)(1,2,3)
+* 如果传的参数多于1个，调用fn.apply(ctx, arguments)
+* 如果传的参数只有1个，调用fn.call(ctx, a)
+* 如果没有传参数，调用fn.call(ctx)
+*/
+function bind$1(fn, ctx) {
+  function boundFn(a) {
+    var l = arguments.length
+    return l
+      ? l > 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx)
+  }
+  // record original fn length
+  // 保存一下原始函数的length属性。
+  boundFn._length = fn.length
+  return boundFn
+}
+```
+
+### toArray
+> 将一个`类似于数组`的对象, 转为数组。  
+> 支持指定`起始索引`。  
+> 核心是计算起始索引到最大长度的`差长度`，创建空数组，  
+> 遍历`类数组`对象，往空数组塞内容。返回数组。
+```js
+/** Convert an Array-like object to a real Array. **/
+function toArray(list, start) {
+  start = start || 0
+  var i = list.length - start
+  // 用变量接收，总长度 - 指定起始索引
+  var ret = new Array(i)
+  // 创建一个i长度的空数组
+  while (i--) {
+    // 循环往数组里追加内容。
+    // 从最大索引(i+start) 一路加到start
+    ret[i] = list[i + start]
+  }
+  return ret
+}
+```
+
+### extend
+> `搬运`传入的`源对象`上的所有`键和值`到`新对象`。  
+> 也就是对象的`键值对扩展`。  
+> 核心是使用`for in`遍历
+```js
+/* Mix properties into target object. */
+function extend(to, _from) {
+  for (var key in _from) {
+    to[key] = _from[key]
+  }
+  return to
+}
+```
+
+### isObject
+> 粗略的对象类型判断。   
+> 主要用于一个已知JSON类型时，判断`JSON对象`还是`JSON字符串`  
+> 核心是使用`typeof`判断。
+```js
+/*
+  * Quick object check - this is primarily used to tell
+  * Objects from primitive values when we know the value
+  * is a JSON-compliant type.
+*/
+function isObject(obj) {
+  return obj !== null && typeof obj === 'object'
+}
+```
+
+### isPlainObject
+> 严格的对象类型判断.  
+> 可以用于判断任意变量是否为`纯js对象`。  
+> 核心是借用`Object.prototype.toString`, 判断是否为`[object Object]`。
+```js
+/*
+  * Strict object type check. Only returns true
+  * for plain JavaScript objects.
+*/
+var toString = Object.prototype.toString
+var OBJECT_STRING = '[object Object]'
+function isPlainObject(obj) {
+  // 使用toString方法，检测对象经过toString后，是否为'[object Object]'
+  // 由于借用了Object.prototype.toString, 所以要用call改变this.
+  return toString.call(obj) === OBJECT_STRING
+}
+```
+- vue3中，继续使用了这个方法
+```js
+/* 
+甚至在vue3中，依旧借用了这个方法，
+但是没有将变量(OBJECT_STRING)暴露在全局中。
+*/
+const isPlainObject = (val) => toTypeString(val) === '[object Object]';
+/** vue3自己封装了toTypeString方法
+ * (目的是为了避免和toString重名)
+ * （底层如下： 还是用toString）。
+**/
+const objectToString = Object.prototype.toString;
+const toTypeString = (value) => objectToString.call(value);
+```
+
+### toObject
+> 和`toArray`方法相反。   
+> 将一个`数组`，转换为`类似数组的`对象。
+> 核心是给`空对象`遍历使用`extend`方法添加为对象。
+```js
+/** Merge an Array of Objects into a single Object. **/
+function toObject(arr) {
+    var res = {}
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i]) {
+        extend(res, arr[i])
+      }
+    }
+    return res
+  }
+```
+### noop
+> 一个函数的`初始形态`,常用于赋值初始值。
+```js
+function noop() { }
+// 489行，给config对象的getTagNamespace赋值为空函数。
+{
+  getTagNamespace: noop
+}
+```
+
+### no
+> 一个一经`调用`就`返回false`的函数
+```js
+/* Always return false. */
+var no = function () { return false; }
+```
+
+### genStaticKeys
+> 获取`编译模块`(数组格式)的`静态(staticKeys)属性`的方法.  
+> 返回其组成的字符串。  
+> 核心是使用数组的`reduce`方法，返回`xx.staticKeys`并且用`concat`连接为数组，最后用`,`连接为字符串。
+```js
+/* Generate a static keys string from compiler modules. */
+function genStaticKeys(modules) {
+  return modules.reduce(function (keys, m) {
+    return keys.concat(m.staticKeys || [])
+  }, []).join(',')
+}
+```
+
+### looseEqual
+> 比较两个`基本类型`或`js对象`是否`大致相等`。  
+> 也就是比较`数据`是否相等，不比较`地址`。  
+> 核心是使用`JSON.stringify`序列化为JSON格式，再`===`比较。  
+> 比较之前，使用`isObject()`判断均为对象.
+```js
+function looseEqual(a, b) {
+  /* eslint-disable eqeqeq */
+  /* JSON.stringify({name: '123'}) === JSON.stringify({name: '123'});  返回true */
+  return a == b || (
+    isObject(a) && isObject(b)
+      ? JSON.stringify(a) === JSON.stringify(b)
+      : false
+  )
+  /* eslint-enable eqeqeq */
+}
+/*
+  测试使用: console.log(looseEqual({name: '123'}, {name: '123'}))
+*/
+```
+
+### looseIndexOf
+> 借用`looseEqual`，遍历检索`数组中`是否有对应的某一个`对象`作为项。  
+> 有则返回索引，没有就返回-1
+
+```js
+function looseIndexOf(arr, val) {
+  for (var i = 0; i < arr.length; i++) {
+    if (looseEqual(arr[i], val)) { return i }
+  }
+  return -1
+}
+```
+
+### isReserved
+> 检索是否为Vue官方的`保留字符`。  
+> 检索`字符/变量`是否以`$`或者`_`开头。  
+> 核心是使用`charCodeAt(0)`判断开头索引的的`UTF-16 字符`,详见[MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)。
+```js
+function isReserved(str) {
+  var c = (str + '').charCodeAt(0)
+  return c === 0x24 || c === 0x5F
+}
+```
+
+### def
+> 定义一个对象的`属性`(property)  
+> 使用`Object.definePorperty`, 只是用于`定义`,并不涉及响应式。
+```js
+function def(obj, key, val, enumerable) {
+  Object.defineProperty(obj, key, {
+    value: val,
+    enumerable: !!enumerable,
+    writable: true,
+    configurable: true
+  })
+}
+```
+
+- vue2.0.1---561行，
+- 时间：20230814，待续。。。
