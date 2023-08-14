@@ -19,6 +19,9 @@
   - index.md 首页
 
 ## 最新效果图
+- 新增`源码解析`文档，主要记录自己学习源码的经历
+<img src="./mdImg/resource.png">
+
 - 新增`ajax`文档
 <img src="./mdImg/ajax.png">
 

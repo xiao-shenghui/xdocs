@@ -49,23 +49,23 @@ module.exports = {
           { text: 'Axios',link: '/tool/axios/index' },
           { text: 'Element-Ui',link: '/tool/element-ui/index' },
           { text: 'jQuery',link: '/tool/jquery/jQuery' },
-          { text: 'Nodejs',link: '/tool/nodejs' },
+          { text: 'Nodejs',link: '/tool/node/index' },
+          { text: 'Less',link: '/tool/less' },
+          { text: 'Typescript',link: '/tool/typescript/index' },
         ]
       },
       {
         text: '杂七杂八',
         items: [
-          { text: 'Express',link: '/other/express' },
-          { text: 'Koa',link: '/other/koa' },
-          { text: 'Express VS Koa',link: '/other/express-koa' },
           { text: 'Gitee',link: '/other/git' },
-          { text: 'Typescript',link: '/other/typescript/index' },
-          { text: 'Less',link: '/other/less' },
           { text: 'Mysql',link: '/other/mysql' },
           { text: 'Nvm',link: '/other/nvm' },
           { text: '瀑布流布局',link: '/other/waterfall' },
           { text: 'Npm包推荐',link: '/other/npm-recommend' }
         ]
+      },
+      {
+        text: '源码解析', link: '/resource/index'
       },
       { text: '配置网站', link: 'https://vitepress.dev/reference/default-theme-nav' },
       
@@ -124,11 +124,6 @@ module.exports = {
           ]
         }
       ],
-      '/react/jsx': [
-        {
-          text: 'JSX', link: '/react/jsx/JSX'
-        }
-      ],
       '/react/react18': [
         {
           text: 'React18',
@@ -159,9 +154,26 @@ module.exports = {
           ]
         }
       ],
-      '/tool/jquery': [
-        {
-          text: 'jQuery', link: '/tool/jquery/jQuery' 
+      '/tool/node': [
+        { 
+          text: 'Nodejs',
+          items: [
+            { text: 'index', link: '/tool/node/index' },
+            { text: 'Nodejs', link: '/tool/node/nodejs' },
+            { text: 'Express', link: '/tool/node/express' },
+            { text: 'Koa', link: '/tool/node/koa' },
+            { text: 'Express VS Koa', link: '/tool/node/express-koa' },
+          ] 
+        }
+      ],
+      '/tool/typescript': [
+        { 
+          text: 'Typescript',
+          items: [
+            { text: 'index', link: '/tool/typescript/index' },
+            { text: 'Typescript基础', link: '/tool/typescript/typescript' },
+            { text: 'Typescript全集', link: '/tool/typescript/typescript-basic' }
+          ] 
         }
       ],
       '/javascript/html5': [
@@ -204,13 +216,13 @@ module.exports = {
           ]
         }
       ],
-      '/other/typescript': [
+      '/resource/': [
         {
-          text: 'Typescript',
+          text: '源码学习',
           items: [
-            { text: 'index', link: '/other/typescript/index' },
-            { text: '认识typescript', link: '/other/typescript/typescript' },
-            { text: 'typescript语法', link: '/other/typescript/typescript-basic' },
+            { text: 'index', link: '/resource/index' },
+            { text: 'Vue2源码解析', link: '/resource/vue2-resource' },
+            { text: 'Vue2心得体会', link: '/resource/vue2-note' },
           ]
         }
       ]
