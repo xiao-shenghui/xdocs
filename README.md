@@ -19,6 +19,10 @@
   - index.md 首页
 
 ## 最新效果图
+- 丰富`vue2源码`，带板块和表格统计。
+<img src="./mdImg/resource-vue2-tool.png">
+<img src="./mdImg/resource-vue2-nextTick.png">
+
 - 新增`源码解析`文档，主要记录自己学习源码的经历
 <img src="./mdImg/resource.png">
 

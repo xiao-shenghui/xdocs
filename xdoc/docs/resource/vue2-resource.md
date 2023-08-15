@@ -27,6 +27,37 @@ typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = 
 ```
 
 ## 工具函数
+> 工具函数及作用大纲  
+
+|函数名|中文名|函数意义|重要级别|描述|
+|---|---|---|---|---|
+|`_toString`|转字符串|||||
+|`toNumber`|转浮点数字||||
+|`makeMap`|是否包含在内||||
+|`remove$1`|移除数组项||
+|`hasOwn`|判断私有属性||||
+|`isPrimitive`|判断原始简单类型||||
+|`cached`|实现缓存|使用闭包函数和对象实现缓存|⭐⭐⭐⭐⭐||
+|`camelize`|转小驼峰|实现连字符转小驼峰||使用正则匹配和replace的第二个参数.|
+|`capitalize`|首字母大写||||
+|`hyphenate`|小驼峰转连字符||||
+|`bind$1`|性能更好的bind|||根据参数的数量，调用`call`和`apply`|
+|`toArray`|转数组|类数组对象转为数组对象，一般用于JSON格式。|||
+|`extend`|搬运扩展对象的属性||||
+|`isObject`|判断是否为普通对象||||
+|`isPlainObject`|判断是否为纯js对象||||
+|`toObject`|数组转类数组对象||||
+|`noop`|函数的初始形态定义||||
+|`no`|返回false的函数||||
+|`genStaticKeys`|获取所有的静态(staticKeys)属性||||
+|`looseEqual`|比较对象是否大致相等||||
+|`looseIndexOf`|遍历对象中的某个对象项||||
+|`isReserved`|判断是否为保留字||||
+|`def`|操控定义对象的属性||||
+|`parsePath`|解析路径|根据`.`字符，获取对象最深层的值|⭐⭐⭐⭐⭐|配合`Watcher`更新数据变化。用于解析Vue模板中的`表达式`, 设置getter.|
+|`isNative`|检测`构造器`是否为`js原生代码`||||
+|`nextTick`|渲染后执行的`延迟回调`，支持指定this.|可以拿到页面`完全渲染`后的数据|⭐⭐⭐⭐⭐||
+
 ### **_toString**
 > 定义一个转`字符串`的方法。   
 > 利用`JSON.stringify`的`3`个参数，实现`处理`，`转换`和`美化输出`。
@@ -565,5 +596,209 @@ function def(obj, key, val, enumerable) {
 }
 ```
 
-- vue2.0.1---561行，
-- 时间：20230814，待续。。。
+### parsePath
+> 逐级获取传入对象最深层(最后项)的属性值。  
+> 核心是使用`split(.)`和返回闭包函数，函数内使用遍历获取最深层的属性值。  
+> Vue中的核心函数之一，用于`Watcher()函数`依赖收集时，设置`this.getter`的。  
+> 用于解析Vue模板中的`表达式`，例如元素绑定或计算属性中用的表达式。  
+> 用于监听对象属性的变化，一旦属性值发生变化时触发相应的更新操作。
+```js
+// Parse simple path.
+/*
+* 如果不含`.`, 直接返回
+* 如果含有，则返回一个函数(支持传对象)，用于遍历,直到取出最终的值。
+* 函数内根据`.`分割为数组，遍历数组，逐级获取传入对象的值，
+* 直到最深层(最后项的值)
+*/
+var bailRE = /[^\w\.\$]/
+function parsePath(path) {
+  if (bailRE.test(path)) {
+    return
+  } else {
+    var segments = path.split('.')
+    // ['\dsadas\dasdas']
+    // 假设obj 传入{}
+    // obj = obj[segments[i]]
+    // obj = undefined
+    return function (obj) {
+      for (var i = 0; i < segments.length; i++) {
+        if (!obj) { return }
+        obj = obj[segments[i]]
+      }
+      return obj
+    }
+  }
+}
+
+/*
+* 测试使用
+* parsePath('a.b.c')({a:{b:{c:'value'}}})
+* 可以返回c的属性值'value'
+* 如果属性c的值变为'name'
+* parsePath('a.b.c')({a:{b:{c:'name'}}})
+* 可以立即拿到值'name'。
+*/
+
+// 一点点Watcher的源码
+if (typeof expOrFn === 'function') {
+  this.getter = expOrFn
+} 
+else {
+  this.getter = parsePath(expOrFn)
+  if (!this.getter) {
+    ...
+  }
+}
+```
+
+### isNative
+> 检测`构造器`是否为`原生代码`,  
+> 使用`/native code/`和`代码的toString()`正则匹配。
+```js
+/* istanbul ignore next */
+  function isNative(Ctor) {
+    return /native code/.test(Ctor.toString())
+  }
+  // Array.toString()
+  // 'function Array() { [native code] }'
+```
+
+### nextTick
+> 在vue中，这个函数表示`渲染后执行的延迟回调`，可以拿到`渲染后`的数据。  
+> 常说vue的任务渲染是异步的，那么其原理就在里面。
+#### 用法
+```js
+Vue.nextTick( [callback, context] )
+/*
+  {Function} [callback]
+  {Object} [context]
+  在下次 DOM 更新循环结束之后执行延迟回调。
+*/
+// 修改数据
+vm.msg = 'Hello'
+// DOM 还没有更新
+Vue.nextTick(function () {
+  // DOM 更新了
+})
+```
+#### 原理
+> nextTick接收`立即执行函数`的结果，返回`queueNextTick函数`  
+> 它接收2个参数，一个是`函数cb`，一个是`可指定对象ctx`。  
+- `ctx`用于指定函数的`this`, 
+  - 如果传了ctx的话,`cb函数`会再`用函数包裹`,
+  - 并且内部用`cb.call(ctx)`改变this, 才推入任务队列.
+- 由于借用了`promise.then()`, 因此所有的任务都是`异步的`。
+- 因此后面使用`nextTick(cb)`传入的`任务cb`，要`等`所有的任务执行完才走。
+```js
+// 由于借用了promise.then(), 因此后面推入的任务都是在所有任务执行完才执行.   
+// 也就是Vue.nextTick()函数的作用原理.
+
+// nextTick立即执行函数里面，设计的就像一个微任务队列一样。
+// 有数组保存任务队列，
+// 有标识符pending表示当前是否正在执行任务，
+// 有清空任务的函数nextTickHandler
+// 有借用promise.then,实现异步执行.
+var nextTick = (function () {
+  var callbacks = []
+  // 回调函数组成的数组
+  var pending = false
+  // 设置一个标识符用于表示是否等待
+  var timerFunc
+  // 定义一个时间函数。
+
+  // 用来清空callbacks任务队列的函数。
+  function nextTickHandler() {
+    // 定义pending为不等待
+    pending = false
+    // 将所有回调函数（任务）截取出来。
+    var copies = callbacks.slice(0)
+    // 清空原来用于保存回调函数的数组
+    callbacks.length = 0
+    // 循环遍历执行所有的回调函数。(也就是清空任务)
+    for (var i = 0; i < copies.length; i++) {
+      copies[i]()
+    }
+  }
+
+  if (typeof Promise !== 'undefined' && isNative(Promise)) {
+        // 如果可以使用Promise
+        var p = Promise.resolve()
+        // 创建一个成功的promise对象p
+        timerFunc = function () {
+          // 产生微任务队列 执行 nextTickHandler
+          // 也就是使用promise.then来清空事件。(异步)
+          p.then(nextTickHandler)
+          if (isIOS) { setTimeout(noop) }
+        }
+  }
+    // 最终返回一个函数queueNextTick，接收cb和ctx
+    // 创建一个变量func，表示单个回调函数(单个任务)
+    // 如果传了ctx,则创建一个函数包裹，
+    // 包裹里面执行让this指向ctx，
+    // 没传则依旧是cb
+    // 然后把该任务推入callbacks任务队列里面。
+    return function queueNextTick(cb, ctx) {
+      var func = ctx
+        ? function () { cb.call(ctx) }
+        : cb
+      callbacks.push(func)
+      // 如果pendding为false,
+      // 改为true, 同时调用nextTickHandler，清空任务。
+      if (!pending) {
+        pending = true
+        timerFunc(nextTickHandler, 0)
+      }
+    }
+})()
+```
+#### 总结
+- nextTick立即执行函数里面，设计的就像一个`微任务队列`一样。
+- 有数组`callbacks`保存任务队列，
+- 有标识符`pending`表示当前是否正在执行任务，
+- 有清空任务的函数`nextTickHandler`
+- 有借用`promise.then`,实现`callbacks`的所有任务都`异步`执行.
+```js
+// the nextTick behavior leverages the microtask queue, 
+// which can be accessed 
+// via either native Promise.then
+```
+
+## 变量及表达式
+> vue源码的表达式大全  
+
+|变量名|中文名|描述|
+|---|---|---|
+|`hasProto`|能否用隐式原型对象||
+|`inBrowser`|检测浏览器环境||
+|`devtools`|检测是否有浏览器插件`devtools`||
+
+
+### hasProto
+> 判断能否使用`__proto__`隐式原型对象。
+```js
+var hasProto = '__proto__' in {}
+```
+
+### inBrowser
+> 判断`window`对象是否可用。  
+> 核心是借用`Object.prototype.toString()`, 转换后看是否为`[object Object]`.
+```js
+var inBrowser = typeof window !== 'undefined' &&
+    Object.prototype.toString.call(window) !== '[object Object]'
+
+// 判断环境
+var UA = inBrowser && window.navigator.userAgent.toLowerCase()
+var isIE = UA && /msie|trident/.test(UA)
+var isIE9 = UA && UA.indexOf('msie 9.0') > 0
+var isEdge = UA && UA.indexOf('edge/') > 0
+var isAndroid = UA && UA.indexOf('android') > 0
+var isIOS = UA && /iphone|ipad|ipod|ios/.test(UA)
+```
+
+### devtools
+> 检测是否有浏览器插件`devtools`
+```js
+var devtools = inBrowser && window.__VUE_DEVTOOLS_GLOBAL_HOOK__
+```
+
+- vue2.0，721行---20230815 待更新
