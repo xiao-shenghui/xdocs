@@ -19,6 +19,9 @@
   - index.md 首页
 
 ## 最新效果图
+- 添加`业务场景`板块，记录一下常见的业务常见(如:文件上传)。
+<img src="./mdImg/scene-upload.png">
+
 - 丰富`vue2源码`，带板块和表格统计。
 <img src="./mdImg/resource-vue2-tool.png">
 <img src="./mdImg/resource-vue2-nextTick.png">

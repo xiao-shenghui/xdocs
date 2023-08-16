@@ -44,6 +44,13 @@ module.exports = {
         ]
       },
       {
+        text: '业务场景',
+        items: [
+          { text: '文件上传', link: '/scene/upload/index' },
+          { text: '瀑布流', link: '/scene/water/waterfall' }
+        ]
+      },
+      {
         text: '工具库',
         items: [
           { text: 'Axios',link: '/tool/axios/index' },
@@ -60,7 +67,6 @@ module.exports = {
           { text: 'Gitee',link: '/other/git' },
           { text: 'Mysql',link: '/other/mysql' },
           { text: 'Nvm',link: '/other/nvm' },
-          { text: '瀑布流布局',link: '/other/waterfall' },
           { text: 'Npm包推荐',link: '/other/npm-recommend' }
         ]
       },
@@ -223,6 +229,16 @@ module.exports = {
             { text: 'index', link: '/resource/index' },
             { text: 'Vue2源码解析', link: '/resource/vue2-resource' },
             { text: 'Vue2心得体会', link: '/resource/vue2-note' },
+          ]
+        }
+      ],
+      '/scene/upload/': [
+        {
+          text: '文件上传',
+          items: [
+            { text: 'index', link: '/scene/upload/index' },
+            { text: '文件上传之前端', link: '/scene/upload/upload-front' },
+            { text: '文件上传之后端', link: '/scene/upload/upload-back' },
           ]
         }
       ]
