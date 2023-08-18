@@ -1,6 +1,6 @@
 ---
 next:
-  text: 'vue2-resource'
+  text: 'vue2源码解析'
   link: './vue2-resource'
 ---
 
@@ -9,6 +9,7 @@ next:
 
 ## 目录大纲
 - [vue2源码解析](./vue2-resource)
+- [vue2属性和方法大全](./vue2-attr)
 - [vue2心得体会](./vue2-note)
 
 

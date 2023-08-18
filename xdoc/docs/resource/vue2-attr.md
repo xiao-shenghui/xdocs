@@ -1,7 +1,239 @@
 # vue2实例的属性
 ## 常用属性大全
 > vue2.4.0及以上的版本。  
-### 私有属性
+
+## 基础的全局方法
+> 包含: Vue.component, Vue.filter, Vue.set, Vue.delete, Vue.mixin, Vue.directive.  
+> 这里主要记录`Vue.filter`和`Vue.mixin`和`Vue.directive`
+### Vue.filter
+> `Vue.filter`: 注册全局过滤器
+```js
+// 注册
+Vue.filter('my-filter', function (value) {
+  // 返回处理后的值
+})
+
+// getter，返回已注册的过滤器
+var myFilter = Vue.filter('my-filter')
+```
+
+### Vue.mixin
+> `Vue.mixin`: 定义全局混入，影响注册之后所有创建的每个 Vue 实例。**`谨慎使用！！`**
+- 全局混入
+```js
+// 为自定义的选项 'myOption' 注入一个处理器。
+Vue.mixin({
+  created: function () {
+    var myOption = this.$options.myOption
+    if (myOption) {
+      console.log(myOption)
+    }
+  }
+})
+
+new Vue({
+  myOption: 'hello!'
+})
+```
+
+- 局部混入
+```js
+// 局部混入，通过定义一个对象的方式。
+// (就跟定义一个局部组件，局部过滤器一样)
+// 在要使用混入的地方，使用mixins: [混入名]
+var mixin = {
+  methods: {
+    foo: function () {
+      console.log('foo')
+    },
+    conflicting: function () {
+      console.log('from mixin')
+    }
+  }
+}
+
+var vm = new Vue({
+  mixins: [mixin],
+  methods: {
+    bar: function () {
+      console.log('bar')
+    },
+    conflicting: function () {
+      console.log('from self')
+    }
+  }
+})
+```
+
+### Vue.directive
+> 主要用于定义全局自定义指令
+- 全局指令
+```js
+// 注册一个全局自定义指令 `v-focus`
+Vue.directive('focus', {
+  // 当被绑定的元素插入到 DOM 中时……
+  inserted: function (el) {
+    // 聚焦元素
+    el.focus()
+  }
+})
+```
+- 局部指令
+```js
+// 使用directives 的选项
+directives: {
+  focus: {
+    // 指令的定义
+    inserted: function (el) {
+      el.focus()
+    }
+  }
+}
+```
+#### 钩子函数
+> 指令的值是一个对象，对象可以包含多个`钩子函数`作为属性。  
+- `bind`: 只调用一次，被绑定时调用
+- `inserted`: 绑定的元素，插入到父节点时调用。
+- `update`: 该组件更新时调用
+- `componentUpdated`: 该组件及子组件更新完调用
+- `unbind`: 只调用一次，解绑时调用。
+
+#### 钩子函数参数
+> 每个`钩子函数`都可以接收`el, binding`等作为参数。
+- `el`: 绑定的DOM元素
+- `binding`: 一个对象，包含指令的所有属性
+  - `name`: 指令名字
+  - `value`: 指令的绑定值
+  - `oldValue`: 指令绑定前的值
+  - `expression`: 字符串形式的表达式`v-focus="1+1"`
+  - `arg`: 传给指令的参数`v-focus:foo`中的`foo`
+  - `modifiers`: 一个包含修饰符的对象。`v-click.prevent`
+- `vnode`: Vue编译生成的虚拟节点
+- `oldVnode`: 上一个虚拟节点。
+```js
+Vue.directive('demo', {
+  bind: function (el, binding, vnode) {
+    var s = JSON.stringify
+    el.innerHTML =
+      'name: '       + s(binding.name) + '<br>' +
+      'value: '      + s(binding.value) + '<br>' +
+      'expression: ' + s(binding.expression) + '<br>' +
+      'argument: '   + s(binding.arg) + '<br>' +
+      'modifiers: '  + s(binding.modifiers) + '<br>' +
+      'vnode keys: ' + Object.keys(vnode).join(', ')
+  }
+})
+```
+
+
+## 高级的全局方法
+> 包含Vue.observable, Vue.compile, Vue.extend, Vue.use, Vue.nextTick
+### Vue.observable
+> `Vue.observable(object)` : 把一个对象变为响应式，也是Compile类的主要功能。
+```js
+const state = Vue.observable({ count: 0 })
+
+const Demo = {
+  render(h) {
+    return h('button', {
+      on: { click: () => { state.count++ }}
+    }, `count is: ${state.count}`)
+  }
+}
+```
+### Vue.compile
+> `Vue.compile(template)`：把一个模板，编译为render函数，编译后可以使用render选项编译为真实DOM。
+```js
+var res = Vue.compile('<div><span>{{ msg }}</span></div>')
+
+new Vue({
+  data: {
+    msg: 'hello'
+  },
+  render: res.render,
+  staticRenderFns: res.staticRenderFns
+})
+```
+### Vue.extend
+>`Vue.extend(options)`：类似与new Vue(options), 但是创建的是组件构造器。一般用于手动创建局部组件。
+创建局部组件的方法有：
+1. 单文件组件 
+2. 定义一个对象 
+3. 使用Vue.extend()方法。
+4. 在局部组件属性的属性值上，写对象。
+```js
+// 创建构造器
+var Profile = Vue.extend({
+  template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+  data: function () {
+    return {
+      firstName: 'Walter',
+      lastName: 'White',
+      alias: 'Heisenberg'
+    }
+  }
+})
+// 创建 Profile 实例，并挂载到一个元素上。
+new Profile().$mount('#mount-point')
+```
+### Vue.use
+> `Vue.use(obj)`方法，会自动调用obj的install方法.
+- 并且传入`Vue`，以便在install方法内添加:
+  - 全局组件(使用Vue.component)，
+  - 全局方法（使用Vue.prototype），
+  - 全局过滤器(使用Vue.filter())，
+  - 全局混入(使用Vue.mixin), 
+  - 写一个库，提供自己的API 等等功能。
+```js
+Vue.use(MyPlugin, { someOption: true })
+MyPlugin.install = function (Vue, options) {
+  // 1. 添加全局方法或 property
+  Vue.myGlobalMethod = function () {
+    // 逻辑...
+  }
+
+  // 2. 添加全局资源
+  Vue.directive('my-directive', {
+    bind (el, binding, vnode, oldVnode) {
+      // 逻辑...
+    }
+    ...
+  })
+
+  // 3. 注入组件选项
+  Vue.mixin({
+    created: function () {
+      // 逻辑...
+    }
+    ...
+  })
+
+  // 4. 添加实例方法
+  Vue.prototype.$myMethod = function (methodOptions) {
+    // 逻辑...
+  }
+}
+```
+
+### Vue.nextTick
+> `Vue.nextTick(callback)`方法，在DOM更新完成后，延迟执行`callback`
+- 常常用于获取更新后的值。
+```js
+// 修改数据
+vm.msg = 'Hello'
+// DOM 还没有更新
+Vue.nextTick(function () {
+  // DOM 更新了
+})
+
+// 作为一个 Promise 使用 (2.1.0 起新增，详见接下来的提示)
+Vue.nextTick()
+  .then(function () {
+    // DOM 更新了
+  })
+```
+
+## 私有属性
 |属性类别|功能类别|属性名|意义|重要性|
 |---|---|---|---|---|
 |私有属性|实例 property|$attrs|包含了`父组件`的`所有属性`对象。除`props`绑定的 (`class` 和 `style` 除外)。||
@@ -18,7 +250,7 @@
 |---|---|$scopedSlots|用于访问`作用域插槽`|⭐⭐⭐⭐|
 |---|---|$slots|用来访问被`插槽分发`的内容。|⭐⭐⭐⭐|
 |---|---|$vnode|用来访问`虚拟节点`||
-### 继承属性
+## 继承属性
 |属性类别|功能类别|属性名|意义|重要性|
 |---|---|---|---|---|
 |继承属性|实例方法/数据|$delete|`删除`对象的`property`(全局`Vue.delete`的别名)||
@@ -65,6 +297,3 @@
 ### $once
 ### $set
 ### $watch
-
-
-

@@ -750,10 +750,28 @@ app.component('ComponentA', ComponentA)
   .component('ComponentC', ComponentC)
 ```
 
-- 局部注册: 单个`.vue`组件，作为局部组件引入
-```vue
+- 局部注册: 
+	- 单个`.vue`组件，作为局部组件引入
+	- vue2中使用`Vue.extend()`或者单独的对象可以定义局部组件。
+	- vue3中使用`defineComponent()`定义局部组件。
+```html
 <script setup>
+// 使用单文件组件
 import ComponentA from "./components/ComponentA.vue"
+import {ref,h} form 'vue'
+const Hello = defineComponent({
+		// <script setup> 中一样使用组合式 API
+		(props) => {
+			const count = ref(0);
+			render: ()=>{
+				return h('div',{},count.value)
+			}
+		},
+		// 或者继续使用选项式
+		props: {
+
+		}
+	});
 </script>
 
 <template>
@@ -762,7 +780,8 @@ import ComponentA from "./components/ComponentA.vue"
 	</div>
 </template>
 
-<!-- 如果没有使用setup, 则使用components显示注册，和vue2一样 -->
+//如果没有使用setup, 则使用components显式注册，和vue2一样
+<script>
 import ComponentA from './ComponentA.js'
 
 export default {
@@ -773,6 +792,7 @@ export default {
     // ...
   }
 }
+</script>
 ```
 
 ### 传递props

@@ -31,8 +31,9 @@ module.exports = {
         items: [
           { text: 'Vue2', link: '/vue/vue2/index' },
           { text: 'Vue-Router', link: '/vue/vue-router/index' },
-          { text: 'VueX', link: '/vue/vuex/index' },
+          { text: 'VueX', link: '/vue/vuex/vuex' },
           { text: 'Vue3', link: '/vue/vue3/index' },
+          { text: 'Pina', link: '/vue/pina/pina' },
         ]
       },
       {
@@ -116,17 +117,6 @@ module.exports = {
             { text: '导航目录', link: '/vue/vue-router/index' },
             { text: 'vue路由', link: '/vue/vue-router/vue-router' },
             { text: 'vue动态路由', link: '/vue/vue-router/vue-router2' },
-          ]
-        }
-      ],
-      '/vue/vuex': [
-        {
-          text: 'VueX',
-          // collapsed: true,
-          // items,子级
-          items: [
-            { text: '导航目录', link: '/vue/vuex/index' },
-            { text: 'vuex状态管理', link: '/vue/vuex/vuex' },
           ]
         }
       ],
@@ -228,6 +218,7 @@ module.exports = {
           items: [
             { text: 'index', link: '/resource/index' },
             { text: 'Vue2源码解析', link: '/resource/vue2-resource' },
+            { text: 'Vue2属性和方法大全', link: '/resource/vue2-attr' },
             { text: 'Vue2心得体会', link: '/resource/vue2-note' },
           ]
         }
