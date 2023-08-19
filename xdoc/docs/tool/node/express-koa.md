@@ -170,8 +170,14 @@ req.body
 /*
 app.use(express.json()); 
 //post解析application/json类型的请求体。
-express.urlencoded()
+express.urlencoded({ extended: true })
 //post解析application/x-www-form-urlencoded类型的请求体。
+
+var multer = require('multer');
+var upload = multer();
+
+// post解析 multipart/form-data  表单格式数据
+app.use(upload.array());
 */
 ```
 ## 实现登录检验功能

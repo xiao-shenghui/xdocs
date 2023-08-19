@@ -198,7 +198,7 @@ app.use(router.routes())
 app.listen(3000)
 ```
 
-## 分级路由
+### 分级路由
 > 将不同功能，分别在不同的文件夹内定义，然后共同引入路由，实现功能区分。
 - 1. 新建`route`文件夹，新建`goods.js`
 ```js
@@ -241,7 +241,7 @@ goods.allowedMethods()
 app.use(router.routes())
 app.listen(3000)
 ```
-## 路由简写
+### 路由简写
 > 使用`router.prefix`可以简写相同的路由.
 ```js
 // user.js
@@ -274,7 +274,7 @@ app.listen(3000)
 ```
 
 
-## 路由参数
+### 路由参数
 - get请求(查询请求/动态路由请求)
 ```js
 // get请求
@@ -319,7 +319,7 @@ app.use(router.routes())
 app.listen(3000)
 ```
 
-## 实现登录检验功能
+### 实现登录检验功能
 ```js
 const Koa = require("koa");
 const Router = require('@koa/router');
@@ -371,7 +371,7 @@ app.use(router.routes())
 app.listen(3000)
 ```
 
-## 路由重定向
+### 路由重定向
 > 使用`ctx.redirect()`可以实现路由重定向
 ```js
 router.get('/user', ctx => {
@@ -379,7 +379,13 @@ router.get('/user', ctx => {
     ctx.redirect('/user/list')
 })
 ```
-
+## 解决跨域问题
+> 引入第三方依赖`@koa/cors`, 亲身经历使用别的依赖都报错，例如`cors, koa-cors`等等  
+> 引入之前可以看`npm官网`的下载量，确定是否官方。
+```js
+const cors = require('@koa/cors');
+app.use(cors())
+```
 ## 服务器静态资源托管
 > 实现访问服务器的静态资源，例如访问图片，访问主页查看API  
 > 引入第三方依赖`koa-static`, 注册依赖，同时新建`public`文件夹。

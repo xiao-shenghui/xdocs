@@ -230,6 +230,7 @@ module.exports = {
             { text: 'index', link: '/scene/upload/index' },
             { text: '文件上传之前端', link: '/scene/upload/upload-front' },
             { text: '文件上传之后端', link: '/scene/upload/upload-back' },
+            { text: '完整上传案例-formData', link: '/scene/upload/formData' },
           ]
         }
       ]

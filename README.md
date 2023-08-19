@@ -19,6 +19,12 @@
   - index.md 首页
 
 ## 最新效果图
+- 新增`完整文件上传案例-formData`文档，
+- 带图片预览，进度预览，取消请求，多选上传，拖拽上传。
+- 带koa定义接口，保存文件，静态托管的详细过程。
+<img src="./mdImg/upload-formdata.png">
+<img src="./mdImg/upload-formdata2.png">
+
 - 新增`pina`文档
 <img src="./mdImg/pina.png">
 
