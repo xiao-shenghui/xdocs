@@ -1,7 +1,7 @@
 ## 一些日志
 - 博客模板: vitepress  
 - vitepress [官方网址]: (https://vitepress.dev/reference/)
-- 同步在github: [xdocs]: (https://github.com/xiaoshenghui12/xdocs.git)
+- 同步在github: [xdocs]: (https://github.com/xiao-shenghui/xdocs.git)
 - 博客搭建工具: npm, cnpm, markdown
 - vitepress优势: 
   - vite工具搭建,
