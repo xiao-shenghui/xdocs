@@ -90,6 +90,7 @@ module.exports = {
             { text: 'vue组件', link: '/vue/vue2/vue-component1' },
             { text: 'vue插槽', link: '/vue/vue2/vue-slot' },
             { text: 'vue父子数据互传', link: '/vue/vue2/vue-component2' },
+            { text: 'vue跨组件通信-EventBus', link: '/vue/vue2/vue-eventbus' },
             { text: 'vue扩展和插件', link: '/vue/vue2/vue-extend-plugin' },
             { text: 'vue-render渲染函数', link: '/vue/vue2/vue-render' },
             { text: 'vue笔记总结', link: '/vue/vue2/vue-total' }
@@ -115,8 +116,9 @@ module.exports = {
           // items,子级
           items: [
             { text: '导航目录', link: '/vue/vue-router/index' },
-            { text: 'vue路由', link: '/vue/vue-router/vue-router' },
+            { text: 'vue路由基础', link: '/vue/vue-router/vue-router' },
             { text: 'vue动态路由', link: '/vue/vue-router/vue-router2' },
+            { text: 'vue路由总结', link: '/vue/vue-router/vue-total' },
           ]
         }
       ],

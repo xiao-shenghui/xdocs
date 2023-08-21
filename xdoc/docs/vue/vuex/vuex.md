@@ -1,11 +1,55 @@
 # vuex状态管理
+## 概念
+> 实现集中式状态（数据）管理的一个Vue插件，
+> 对多个组件的共享状态进行集中式的管理（读/写），也是一种组件间通信的方式
+
+## 何时使用？
+多个组件需要共享数据时, 适用于任意组件间通信。
+
 ## 安装
 - 安装
 ```sh
 cnpm i vuex
 ```
 ## 定义
-- 定义
+- 搭建vuex环境
+```js
+// src/store/index.js
+//引入Vue核心库
+import Vue from 'vue'
+//引入Vuex
+import Vuex from 'vuex'
+//应用Vuex插件
+Vue.use(Vuex)
+
+//准备actions对象——响应组件中用户的动作
+const actions = {}
+//准备mutations对象——修改state中的数据
+const mutations = {}
+//准备state对象——保存具体的数据
+const state = {}
+
+//创建并暴露store
+export default new Vuex.Store({
+actions,
+mutations,
+state
+})
+```
+- 在`main.js`引入
+```js
+//引入store
+import store from './store'
+......
+
+//创建vm
+new Vue({
+el:'#app',
+render: h => h(App),
+store
+})
+```
+## 完整定义
 ```js
 // 必须使用store变量接收，不然组件内无法注册和使用。
 // 使用 new Vuex.Store({配置对象})定义一个store仓库。
@@ -68,6 +112,8 @@ const moudleA = {
 ```
 ## 使用
 - 组件内如何使用?
+- 读取vuex中的数据：`$store.state.xxx`
+- 修改vuex中的数据：`$store.dispatch('action中的方法名',数据)` 或 `$store.commit('mutations中的方法名',数据)`
 ```js
 // 1. 根组件(Vue)内 引入注册
 new Vue({
@@ -107,6 +153,118 @@ Vue.component("father", {
 }
 </script>
 ```
+
+## 四个map方法的使用
+
+1. <strong>mapState方法：</strong>用于帮助我们映射```state```中的数据为计算属性
+
+   ```js
+   computed: {
+       //借助mapState生成计算属性：sum、school、subject（对象写法）
+        ...mapState({sum:'sum',school:'school',subject:'subject'}),
+            
+       //借助mapState生成计算属性：sum、school、subject（数组写法）
+       ...mapState(['sum','school','subject']),
+   },
+   ```
+
+2. <strong>mapGetters方法：</strong>用于帮助我们映射```getters```中的数据为计算属性
+
+   ```js
+   computed: {
+       //借助mapGetters生成计算属性：bigSum（对象写法）
+       ...mapGetters({bigSum:'bigSum'}),
+   
+       //借助mapGetters生成计算属性：bigSum（数组写法）
+       ...mapGetters(['bigSum'])
+   },
+   ```
+
+4. <strong>mapMutations方法：</strong>用于帮助我们生成与```mutations```对话的方法，即：包含```$store.commit(xxx)```的函数
+
+   ```js
+   methods:{
+       //靠mapActions生成：increment、decrement（对象形式）
+       ...mapMutations({increment:'JIA',decrement:'JIAN'}),
+       
+       //靠mapMutations生成：JIA、JIAN（对象形式）
+       ...mapMutations(['JIA','JIAN']),
+   }
+   ```
+
+> 备注：mapActions与mapMutations使用时，若需要传递参数需要：在模板中绑定事件时传递好参数，否则参数是事件对象。
+
+
+## 模块化+命名空间
+
+1. 目的：让代码更好维护，让多种数据分类更加明确。
+
+2. 修改```store.js```
+
+   ```javascript
+   const countAbout = {
+     namespaced:true,//开启命名空间
+     state:{x:1},
+     mutations: { ... },
+     actions: { ... },
+     getters: {
+       bigSum(state){
+          return state.sum * 10
+       }
+     }
+   }
+   
+   const personAbout = {
+     namespaced:true,//开启命名空间
+     state:{ ... },
+     mutations: { ... },
+     actions: { ... }
+   }
+   
+   const store = new Vuex.Store({
+     modules: {
+       countAbout,
+       personAbout
+     }
+   })
+   ```
+
+3. 开启命名空间后，组件中读取state数据：
+
+   ```js
+   //方式一：自己直接读取
+   this.$store.state.personAbout.list
+   //方式二：借助mapState读取：
+   ...mapState('countAbout',['sum','school','subject']),
+   ```
+
+4. 开启命名空间后，组件中读取getters数据：
+
+   ```js
+   //方式一：自己直接读取
+   this.$store.getters['personAbout/firstPersonName']
+   //方式二：借助mapGetters读取：
+   ...mapGetters('countAbout',['bigSum'])
+   ```
+
+5. 开启命名空间后，组件中调用dispatch
+
+   ```js
+   //方式一：自己直接dispatch
+   this.$store.dispatch('personAbout/addPersonWang',person)
+   //方式二：借助mapActions：
+   ...mapActions('countAbout',{incrementOdd:'jiaOdd',incrementWait:'jiaWait'})
+   ```
+
+6. 开启命名空间后，组件中调用commit
+
+   ```js
+   //方式一：自己直接commit
+   this.$store.commit('personAbout/ADD_PERSON',person)
+   //方式二：借助mapMutations：
+   ...mapMutations('countAbout',{increment:'JIA',decrement:'JIAN'}),
+   ```
+
 
 ## 完整案例
 ```html
