@@ -108,9 +108,3 @@ function imgP() {
 }
 
 ```
-## 效果
-- 小尺寸：
-<img src="../public/waterfall.png">
-
-- 大尺寸：
-<img src="../public/waterfall2.png">

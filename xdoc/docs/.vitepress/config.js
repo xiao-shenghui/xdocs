@@ -1,6 +1,7 @@
 module.exports = {
   title: 'XDocs',
   description: '一个用于记录的vitepress静态博客',
+  base: '/xdocs.github.io/',
   markdown: {
     lineNumbers: true
   },
