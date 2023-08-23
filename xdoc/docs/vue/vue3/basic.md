@@ -443,6 +443,7 @@ const styleObject = reactive({
 > 其中：条件渲染(例如`v-if`), 列表渲染(例如`v-for`), 表单输入绑定(例如`v-model`)和vue2一致。
 
 ## 生命周期
+> 生命周期一般围绕四大件(创建，挂载，更新，销毁)
 ### vue2的生命周期函数
 - `beforeCreate`: 在`实例初始化`之后,进行`数据侦听`和事件/侦听器的`配置之前`同步调用。
 - `created`: 在`实例创建完成`后，被立即同步调用。此时已经`完成`了Vue实例的`配置项设置`，但是没有挂载, `$el`属性此时不可用。
@@ -454,6 +455,9 @@ const styleObject = reactive({
 - `destroyed`: `实例销毁后。`被调用
 
 ### vue3的生命周期函数
+> 函数名与`vue2`基本一致，只将`destory`修改为了`unmounted`。
+- `onBeforeCreate()`: 注册一个钩子，在组件`被挂载之前`被调用。
+- `onCreated()`: 注册一个钩子，在组件`被挂载之前`被调用。
 - `onBeforeMount()`: 注册一个钩子，在组件`被挂载之前`被调用。
 - `onMounted()`: 注册一个回调函数，在组件`挂载完成后`执行
 - `onBeforeUpdate()`: 注册一个钩子，在组件即将因`响应式状态`变更而`更新DOM 树之前`调用。
@@ -470,6 +474,16 @@ const styleObject = reactive({
 	});
 </script>
 ```
+### vue2与vue3图示
+- vue2(左) + vue3(右)
+<img src="../../public/vue2-vue3-lifecycle.jpg">
+
+- vue2简图
+<img src="../../public/vue2-lifecycle-simple.png">
+
+- vue3简图
+<img src="../../public/vue3-lifecycle-simple.png">
+
 
 ## 监听器
 > 和vue2一样，vue2是`watch属性`，vue3是`watch函数`  

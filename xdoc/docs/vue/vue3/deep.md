@@ -52,6 +52,7 @@ oldVnode：上一个虚拟节点
 ```
 
 - vue3指令的钩子函数
+> vue3设计为：`指令的`生命周期与`组件的`生命周期方法同名，方便记忆。
 ```js
 const myDirective = {
   // 在绑定元素的 attribute 前
