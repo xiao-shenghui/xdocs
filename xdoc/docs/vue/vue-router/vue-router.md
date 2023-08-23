@@ -213,7 +213,7 @@ const router = new VueRouter({
 	{
 		path: "/one",
 		component: one,
-		beforeEach: (from, to, next)=>{
+		beforeEnter: (from, to, next)=>{
 			if(to.path === "/two"){
 				next("/one");
 				// 模拟实现了重定向的功能，

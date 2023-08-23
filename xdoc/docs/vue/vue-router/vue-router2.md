@@ -152,3 +152,79 @@ Vue.component("about",{
     </script>
 </body>
 ```
+
+## $route和$router
+### $route
+> 表示`路由对象`，对应配置项里的`routes`,   
+> `$route`包含了`当前 URL`解析得到的`路由信息`。  
+> 一般用于获取路由信息。例如路由路径，名称，查询参数，动态路由参数等等。
+- $route的全部属性
+|属性名|作用|描述|
+|---|---|---|
+|$route.path|当前路径||
+|$route.query|查询参数|对于路径`/foo?user=1`，则有`$route.query.user == 1`|
+|$route.params|动态路由参数|对于路径`/foo/1`，则有`$route.params.user == 1`|
+|$route.name|路由名称||
+|$route.hash|当前路由的`hash`值||
+|$route.fullPath|包含查询参数和 hash 的完整路径。||
+|$route.matched|当前路由的完整副本，包含`children`||
+
+### $router
+> 表示`路由实例`，对应整个`new VueRouter()`,  
+> `$router`包含了一系列`路由相关的方法`
+> 与原生js的`history`对象的方法非常相似。
+> 一般用于操作路由对象，改变路由，添加路由守卫拦截等等。
+- $router的常用方法
+|类别|方法名|作用|描述|
+|---|---|---|---|
+|编程式导航|$router.push|动态导航到一个新的URL,支持携带参数||
+||$router.replace|与push一致，但是没有历史记录||
+||$router.go|往前或后走`n`个记录||
+||$router.back|往后走`1`个记录||
+||$router.forward|往前走`1`个记录||
+|导航守卫|$router.beforeEach|前置路由守卫|`(from,to,next)`根据路由信息进行拦截|
+||$router.afterEach|后置路由守卫|`(from,to)`根据路由信息进行拦截|
+|错误回调|$router.onError|出错时的路由回调|`router.onError(callback)`|
+
+
+### 编程式导航
+```js
+// 字符串
+router.push('home')
+
+// 对象
+router.push({ path: 'home' })
+
+// 命名的路由
+router.push({ name: 'user', params: { userId: '123' }})
+
+// 带查询参数，变成 /register?plan=private
+router.push({ path: 'register', query: { plan: 'private' }})
+
+router.push('home')
+```
+
+### 路由守卫
+```js
+// 当在配置路由的文件定义时
+// index.js
+// 全局路由守卫(前置)
+router.beforeEach((from,to,next)=>{
+    // ....
+})
+// 局部路由守卫(前置)
+routes: [
+    {
+        path: '/'
+        beforeEnter(from,to,next){
+            // ....
+        }
+    }
+]
+
+// 当在组件中定义时，使用this.$router.xxx
+// HomeView.vue
+this.$router.beforeEach((from,to,next)=>{
+    // ...
+});
+```
