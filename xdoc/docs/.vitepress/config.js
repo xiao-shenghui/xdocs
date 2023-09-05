@@ -94,6 +94,7 @@ module.exports = {
             { text: 'vue跨组件通信-EventBus', link: '/vue/vue2/vue-eventbus' },
             { text: 'vue扩展和插件', link: '/vue/vue2/vue-extend-plugin' },
             { text: 'vue-render渲染函数', link: '/vue/vue2/vue-render' },
+            { text: 'vue-从零开始', link: '/vue/vue2/vue-all' },
             { text: 'vue笔记总结', link: '/vue/vue2/vue-total' }
           ]
         }

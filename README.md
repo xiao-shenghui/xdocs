@@ -21,6 +21,9 @@
   - index.md 首页
 
 ## 最新效果图
+- 添加`vue2从0-1`文档
+<img src="./mdImg/vue2-0-1.jpg">
+
 - 更新`vue3基础-生命周期`
 <img src="./mdImg/vue2-vue3-lifecycle.jpg">
 
