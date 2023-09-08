@@ -224,6 +224,7 @@ module.exports = {
             { text: 'Vue2源码解析', link: '/resource/vue2-resource' },
             { text: 'Vue2属性和方法大全', link: '/resource/vue2-attr' },
             { text: 'Vue2心得体会', link: '/resource/vue2-note' },
+            { text: '理解设计模式', link: '/resource/js-design-model' },
           ]
         }
       ],

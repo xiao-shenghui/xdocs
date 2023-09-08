@@ -11,6 +11,7 @@ next:
 - [vue2源码解析](./vue2-resource)
 - [vue2属性和方法大全](./vue2-attr)
 - [vue2心得体会](./vue2-note)
+- [理解设计模式](./js-design-model)
 
 
 
