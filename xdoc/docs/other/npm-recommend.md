@@ -63,3 +63,17 @@ create-react-app my-app #创建react项目
 npx create-react-app my-app #创建react项目, 
 # npx是从npm5.2+版本就自带的，不需要另外安装。
 ```
+
+## TSC
+> 一个官方推荐和开发的，自动运行+编译ts文件的typescript包
+### 安装
+```sh
+cnpm install typescript -g #安装
+tsc -v #检测是否安装成功
+```
+
+### 使用
+```sh
+tsc -help #帮助
+tsc -w xx.ts #监测ts文件变化，并且自动编译
+```

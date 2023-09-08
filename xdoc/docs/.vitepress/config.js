@@ -28,6 +28,16 @@ module.exports = {
       },
       {
         // items子级下拉框
+        text: 'Typescript',
+        items: [
+          { text: 'TS导航', link: '/typescript/index' },
+          { text: 'TS基础', link: '/typescript/typescript' },
+          { text: 'TS合集', link: '/typescript/typescript-basic' },
+          { text: 'JS-To-Ts', link: '/typescript/js-to-ts' },
+        ]
+      },
+      {
+        // items子级下拉框
         text: 'Vue',
         items: [
           { text: 'Vue2', link: '/vue/vue2/index' },
@@ -60,7 +70,6 @@ module.exports = {
           { text: 'jQuery',link: '/tool/jquery/jQuery' },
           { text: 'Nodejs',link: '/tool/node/index' },
           { text: 'Less',link: '/tool/less' },
-          { text: 'Typescript',link: '/tool/typescript/index' },
         ]
       },
       {
@@ -163,16 +172,6 @@ module.exports = {
             { text: 'Express', link: '/tool/node/express' },
             { text: 'Koa', link: '/tool/node/koa' },
             { text: 'Express VS Koa', link: '/tool/node/express-koa' },
-          ] 
-        }
-      ],
-      '/tool/typescript': [
-        { 
-          text: 'Typescript',
-          items: [
-            { text: 'index', link: '/tool/typescript/index' },
-            { text: 'Typescript基础', link: '/tool/typescript/typescript' },
-            { text: 'Typescript全集', link: '/tool/typescript/typescript-basic' }
           ] 
         }
       ],

@@ -21,6 +21,12 @@
   - index.md 首页
 
 ## 最新效果图
+- 将typescript挪到导航栏，新增`js-to-ts`文档
+<img src="./mdImg/typescript.jpg">
+
+- 源码模块中，添加`js经典设计模式`
+<img src="./mdImg/js-design-model.jpg">
+
 - 添加`vue2从0-1`文档
 <img src="./mdImg/vue2-0-1.jpg">
 
