@@ -1,99 +1,85 @@
-## 一些日志
-- 博客模板: vitepress  
-- vitepress [官方网址:](https://vitepress.dev/reference/)
-- 同步在github: [xdocs:](https://github.com/xiao-shenghui/xdocs.git)
-- 项目部署在github静态托管：[线上预览:](https://xiao-shenghui.github.io/xdocs.github.io/)
-- 博客搭建工具: npm, cnpm, markdown
-- vitepress优势: 
-  - vite工具搭建,
-  - 热更新快, 
-  - 搭建简单,
-  - 自带代码高亮, 
-  - 日夜模式, 
-  - 侧边栏, 
-  - 主题配置.
+[English](./README.en.md) | 简体中文
 
-## 博客启动
-> npm run docs:dev
-## 博客目录
-- docs 项目目录
-  - .vitepress 配置文件
-  - index.md 首页
+<h1 align="center">XDocs</h1>
+<div align="center">
+一个打工人的前端技术Blog. 基于尤大大的 <a href="https://vuecomponent.github.io/ant-design-vue/docs/vue/introduce-cn/" target="_blank">Vitepress</a>
+</div>
 
-## 最新效果图
-- 将typescript挪到导航栏，新增`js-to-ts`文档
-<img src="./mdImg/typescript.jpg">
 
-- 源码模块中，添加`js经典设计模式`
-<img src="./mdImg/js-design-model.jpg">
+<div align="center">
 
-- 添加`vue2从0-1`文档
-<img src="./mdImg/vue2-0-1.jpg">
+[![License](https://img.shields.io/npm/l/package.json.svg?style=flat)](https://github.com/xiao-shenghui/xdocs)
+[![Personal Blog](https://img.shields.io/badge/Personal-Blog-yellow?style=flat)](https://vitepress.dev/)
+[![Support Markdown](https://img.shields.io/badge/Support-Markdown-red?style=flat)](https://vitepress.dev/)
+[![Based Vitepress](https://img.shields.io/badge/Based-Vitepress-blue?style=flat)](https://vitepress.dev/)
 
-- 更新`vue3基础-生命周期`
-<img src="./mdImg/vue2-vue3-lifecycle.jpg">
+</div>
 
-- 新增`完整文件上传案例-formData`文档，
-- 带图片预览，进度预览，取消请求，多选上传，拖拽上传。
-- 带koa定义接口，保存文件，静态托管的详细过程。
-<img src="./mdImg/upload-formData(2).png">
-<img src="./mdImg/upload-formdata.png">
-<img src="./mdImg/upload-formdata2.png">
+- 预览: https://github.com/xiao-shenghui/xdocs.git
+- Gitee仓库: https://gitee.com/xiao-shenghui/xdocs
+- Github仓库: https://github.com/xiao-shenghui/xdocs
+- 更新日志: https://gitee.com/xiao-shenghui/xdocs/blob/master/README-log.md
 
-- 新增`pina`文档
-<img src="./mdImg/pina.png">
+Overview
+----
 
-- 添加`业务场景`板块，记录一下常见的业务常见(如:文件上传)。
-<img src="./mdImg/scene-upload.png">
+基于 [Vitepress v1.0.0](https://vitepress.dev/)的前端技术文档，[XDocs](https://github.com/xiao-shenghui/xdocs.git) 
 
-- 丰富`vue2源码`，带板块和表格统计。
-<img src="./mdImg/resource-vue2-tool.png">
-<img src="./mdImg/resource-vue2-nextTick.png">
+![home](https://gitee.com/xiao-shenghui/xdocs/raw/master/mdImg/home-2.0.png)
 
-- 新增`源码解析`文档，主要记录自己学习源码的经历
-<img src="./mdImg/resource.png">
 
-- 新增`ajax`文档
-<img src="./mdImg/ajax.png">
+导航目录
+----
+- [x] Javascript -- (H5新增 --> ES6+) -- 完成 ✨✨
+- [x] Typescript -- 更新中 🎉🎉
+- [x] Vue -- (Vue2 --> Vue3) -- 更新中 🌹🌹
+- [x] React -- (JSX --> React18) -- 更新中 👍👍
+- [x] 业务场景 -- (文件上传, 瀑布流) -- 更新中 ✨✨
+- [x] 工具库 -- (Axios ---> Nodejs) -- 更新中 ✨✨
+- [x] 杂七杂八 -- (Gitee ---> Npm包推荐) -- 更新中 ✨✨
+- [x] 源码解析 -- Vue2 -- 更新中👍👍
 
-- 新增`vue2笔记总结`文档
-<img src="./mdImg/vue-total.png">
 
-- 新增`npm包推荐`文档
-<img src="./mdImg/npm-recommend.png">
+环境和依赖
+----
+- node
+- npm/cnpm
+- vsCode
+- markdown
 
-- 新增`vue3`文档, 设置`深层次目录`大纲
-<img src="./mdImg/vue3.png">
+> vitepress优势: `vite`工具搭建, 热更新快, markdown编译, 自带代码高亮, 日夜模式, 配置简单, 主题配置.
 
-- 新增`响应式瀑布流布局`文档
-<img src="./mdImg/waterfall.png">
 
-- 新增koa文档
-<img src="./mdImg/koa.png">
 
-- 打包上线展示
-<img src="./mdImg/online.png">
+项目下载和运行
+----
 
-- Nodejs
-<img src="./mdImg/nodejs.png">
+- 拉取博客代码
+```bash
+git clone https://gitee.com/xiao-shenghui/xdocs
+cd xdocs
+```
 
-- ES6和Promise
-<img src="./mdImg/ES6和Promise.png">
+- 开发模式运行
+```bash
+npm start 
+#或者
+npm run docs:dev
+```
 
-- 丰富javascript文档
-<img src="./mdImg/javascript.png">
+- 编译打包项目: 
+```bash
+npm run docs:build
+```
+>具体编译请参考vitepress编译. [Build](https://vitepress.dev/reference/site-config#build)
 
-- 首页2.0
-<img src="./mdImg/home-2.0.png">
 
-- 丰富的前端知识
-<img src="./mdImg/tool.png">
+写在最后
+----
+- 学习的本质是`输入与输出`。   
+- 在初次了解`费曼学习法`时，深感认同且一直被其影响，因此创立了`XDocs`用于记录。
+搭建博客时使用过`Hexo`，`Vuepress`和`Wrodpress`等静态博客搭建工具，曾经有过一版`Vuepress`的`XDocs`, 但大都没有积累和坚持下去。
+- 在了解到`Vue3及Vite`后，接触到`Vitepress`这个非常优秀的搭建工具, 并决定将其作为最终的方案。
 
-- 夜间模式
-<img src="./mdImg/dark.png">
-
-- 首页1.0
-<img src="./mdImg/home.png">
-
-- 侧边栏和导航栏
-<img src="./mdImg/vue2.png">
+> 某种程度上，我准备将`XDocs`可以作为存储知识的`第二仓库`，并分享给一起进步和学习的伙伴。  
+> 如果对您有帮助🌹，您可以点右上角 `Star` 支持一下 谢谢！ ^_^ 
