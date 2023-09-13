@@ -33,6 +33,7 @@ Navigation
 - [x] Typescript -- updating 🎉🎉
 - [x] Vue -- (Vue2 --> Vue3) -- updating 🌹🌹
 - [x] React -- (JSX --> React18) -- updating 👍👍
+- [x] 小程序 -- (原生小程序 --> Uniapp) -- updating 👍👍
 - [x] 业务场景 -- (文件上传, 瀑布流) -- updating ✨✨
 - [x] 工具库 -- (Axios ---> Nodejs) -- updating ✨✨
 - [x] 杂七杂八 -- (Gitee ---> Npm包推荐) -- updating ✨✨

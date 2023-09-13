@@ -56,6 +56,13 @@ module.exports = {
         ]
       },
       {
+        text: '小程序',
+        items: [
+          { text: '原生小程序', link: '/miniProgram/native' },
+          { text: 'Uniapp', link: '/miniProgram/uniapp' }
+        ]
+      },
+      {
         text: '业务场景',
         items: [
           { text: '文件上传', link: '/scene/upload/index' },

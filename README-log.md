@@ -21,6 +21,9 @@
   - index.md 首页
 
 ## 最新效果图
+- 新增小程序目录页，更新`原生小程序`文档
+<img src="./mdImg/miniprogram.jpg">
+
 - 将typescript挪到导航栏，新增`js-to-ts`文档
 <img src="./mdImg/typescript.jpg">
 
