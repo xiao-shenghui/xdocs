@@ -14,7 +14,7 @@ A front-end technology blog for workers. Based on Mr. You's <a href="https://vue
 
 </div>
 
-- Overview: https://github.com/xiao-shenghui/xdocs.git
+- Overview Online: https://xiao-shenghui.github.io/xdocs.github.io/
 - Gitee Repo: https://gitee.com/xiao-shenghui/xdocs
 - Github Repo: https://github.com/xiao-shenghui/xdocs
 - Update Log: https://gitee.com/xiao-shenghui/xdocs/blob/master/README-log.md
@@ -24,7 +24,7 @@ Overview
 
 A front-end blog which is based on [Vitepress v1.0.0](https://vitepress.dev/)，[XDocs](https://github.com/xiao-shenghui/xdocs.git) 
 
-![home](https://gitee.com/xiao-shenghui/xdocs/raw/master/mdImg/home-2.0.png)
+![home](https://raw.githubusercontent.com/xiao-shenghui/xdocs/master/mdImg/home.jpg)
 
 
 Navigation

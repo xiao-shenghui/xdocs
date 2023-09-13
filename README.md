@@ -15,7 +15,7 @@
 
 </div>
 
-- 预览: https://github.com/xiao-shenghui/xdocs.git
+- 线上预览: https://xiao-shenghui.github.io/xdocs.github.io/
 - Gitee仓库: https://gitee.com/xiao-shenghui/xdocs
 - Github仓库: https://github.com/xiao-shenghui/xdocs
 - 更新日志: https://gitee.com/xiao-shenghui/xdocs/blob/master/README-log.md
@@ -25,7 +25,7 @@ Overview
 
 基于 [Vitepress v1.0.0](https://vitepress.dev/)的前端技术文档，[XDocs](https://github.com/xiao-shenghui/xdocs.git) 
 
-![home](https://gitee.com/xiao-shenghui/xdocs/raw/master/mdImg/home-2.0.png)
+![home](https://raw.githubusercontent.com/xiao-shenghui/xdocs/master/mdImg/home.jpg)
 
 
 导航目录
