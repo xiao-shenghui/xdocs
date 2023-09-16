@@ -21,6 +21,9 @@
   - index.md 首页
 
 ## 最新效果图
+- 新增`vue3 API-系列`文档
+<img src="./mdImg/vue3-api.jpg">
+
 - 新增小程序目录页，更新`原生小程序`文档
 <img src="./mdImg/miniprogram.jpg">
 

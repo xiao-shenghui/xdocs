@@ -123,7 +123,11 @@ module.exports = {
           items: [
             { text: '导航目录', link: '/vue/vue3/index' },
             { text: 'vue3基础', link: '/vue/vue3/basic' },
-            { text: 'vue3深入', link: '/vue/vue3/deep' }
+            { text: 'vue3深入', link: '/vue/vue3/deep' },
+            { text: 'vue3全局API', link: '/vue/vue3/API-global' },
+            { text: 'vue3组合式API', link: '/vue/vue3/API-setup' },
+            { text: 'vue3内置内容', link: '/vue/vue3/API-build' },
+            { text: 'vue3进阶API', link: '/vue/vue3/API-deep' },
           ]
         }
       ],
