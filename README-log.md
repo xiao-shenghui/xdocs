@@ -21,6 +21,9 @@
   - index.md 首页
 
 ## 最新效果图
+- 业务场景中，添加`骨架屏`学习文档
+<img src="./mdImg/skeleton.jpg">
+
 - 新增`vue3 API-系列`文档
 <img src="./mdImg/vue3-api.jpg">
 

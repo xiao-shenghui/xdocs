@@ -66,7 +66,8 @@ module.exports = {
         text: '业务场景',
         items: [
           { text: '文件上传', link: '/scene/upload/index' },
-          { text: '瀑布流', link: '/scene/water/waterfall' }
+          { text: '瀑布流', link: '/scene/water/waterfall' },
+          { text: '骨架屏', link: '/scene/skeleton/index' }
         ]
       },
       {
@@ -128,6 +129,7 @@ module.exports = {
             { text: 'vue3组合式API', link: '/vue/vue3/API-setup' },
             { text: 'vue3内置内容', link: '/vue/vue3/API-build' },
             { text: 'vue3进阶API', link: '/vue/vue3/API-deep' },
+            { text: 'vue3-setup语法糖', link: '/vue/vue3/Script-setup' },
           ]
         }
       ],
@@ -246,6 +248,15 @@ module.exports = {
             { text: '文件上传之前端', link: '/scene/upload/upload-front' },
             { text: '文件上传之后端', link: '/scene/upload/upload-back' },
             { text: '完整上传案例-formData', link: '/scene/upload/formData' },
+          ]
+        }
+      ],
+      '/scene/skeleton/': [
+        {
+          text: '骨架屏',
+          items: [
+            { text: 'index', link: '/scene/skeleton/index' },
+            { text: '初步认识骨架屏', link: '/scene/skeleton/skeleton' },
           ]
         }
       ]
