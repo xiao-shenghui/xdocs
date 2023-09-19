@@ -20,7 +20,10 @@
   - .vitepress 配置文件
   - index.md 首页
 
-## 最新效果图
+## 最新日志和效果图
+- 更新`vue-router 4.x`学习文档，更新`vue3-setup语法糖`和`vue3-全局API`文档
+<img src="./mdImg/vue3-router.jpg">
+
 - 业务场景中，添加`骨架屏`学习文档
 <img src="./mdImg/skeleton.jpg">
 

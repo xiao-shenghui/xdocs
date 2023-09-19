@@ -133,7 +133,7 @@
       			component:Test,
       			children:[
       				{
-                            name:'hello' //给路由命名
+                     name:'hello' //给路由命名
       					path:'welcome',
       					component:Hello,
       				}

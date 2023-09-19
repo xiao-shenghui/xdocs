@@ -140,9 +140,10 @@ module.exports = {
           // items,子级
           items: [
             { text: '导航目录', link: '/vue/vue-router/index' },
-            { text: 'vue路由基础', link: '/vue/vue-router/vue-router' },
-            { text: 'vue动态路由', link: '/vue/vue-router/vue-router2' },
-            { text: 'vue路由总结', link: '/vue/vue-router/vue-total' },
+            { text: 'vue2-路由基础', link: '/vue/vue-router/vue-router' },
+            { text: 'vue2-动态路由匹配', link: '/vue/vue-router/vue-router2' },
+            { text: 'vue2-路由总结', link: '/vue/vue-router/vue-total' },
+            { text: 'vue3-路由', link: '/vue/vue-router/vue3-router' },
           ]
         }
       ],

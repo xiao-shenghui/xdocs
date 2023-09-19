@@ -7,8 +7,8 @@
 > `vue2`的`element-ui`组件库，也有`skeleton组件`。[Skeleton 骨架屏](https://element.eleme.cn/#/zh-CN/component/skeleton)
 
 ## 实现方式
-> 方式1: 设计类似真实数据的骨架屏dom, 请求完成前显示骨架屏dom.
-> 方式2: 对于图片节点的骨架屏，更好的方式是设置`背景为灰色`,当请求到内容时，赋值src.
+> 方式1: 设计类似真实数据的骨架屏dom, 请求完成前显示骨架屏dom.  
+> 方式2: 对于图片节点的骨架屏，更好的方式是设置`背景为灰色`,当请求到内容时，赋值src.  
 > 方式3: 使用组件库, 例如`element-plus`的`skeleton组件`。或者`vue-skeleton-webpack-plugin`插件。
 
 ## 常规思路
