@@ -21,6 +21,9 @@
   - index.md 首页
 
 ## 最新日志和效果图
+- 添加`vitest`学习文档。
+<img src="./mdImg/vitest.jpg">
+
 - 更新`vue-router 4.x`学习文档，更新`vue3-setup语法糖`和`vue3-全局API`文档
 <img src="./mdImg/vue3-router.jpg">
 
