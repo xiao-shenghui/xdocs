@@ -78,6 +78,7 @@ module.exports = {
           { text: 'jQuery',link: '/tool/jquery/jQuery' },
           { text: 'Nodejs',link: '/tool/node/index' },
           { text: 'Less',link: '/tool/less' },
+          { text: 'Vitest',link: '/tool/vitest' }
         ]
       },
       {
