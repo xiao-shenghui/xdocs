@@ -21,6 +21,9 @@
   - index.md 首页
 
 ## 最新日志和效果图
+- 新增`webpack`核心概念及使用。
+<img src="./mdImg/webpack.jpg">
+
 - 更换主题，设计LOGO。
 <img src="./mdImg/home.jpg">
 
