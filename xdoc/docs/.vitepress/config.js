@@ -6,6 +6,10 @@ module.exports = {
     lineNumbers: true
   },
   themeConfig: {
+    // 社交账号
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/xiao-shenghui/xdocs' }
+    ],
     // 网页标题
     siteTitle: 'XDocs',
     // 指定大纲的层级

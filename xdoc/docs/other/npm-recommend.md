@@ -42,8 +42,8 @@ nodemon ./server.js # 启动js文件
 ```
 
 ## 框架的脚手架
-> vue: vue-cli(旧), 新版推荐使用`npm init vue@latest`,这个指令会自动执行`create-vue`  
-> react: create-react-app 
+> vue2: vue-cli(旧), 新版推荐使用`npm init vue@latest`,这个指令会自动执行`create-vue`  
+> react: create-react-app   
 ### 全局安装
 ```sh
 npm install vue-cli -g
@@ -63,7 +63,11 @@ create-react-app my-app #创建react项目
 npx create-react-app my-app #创建react项目, 
 # npx是从npm5.2+版本就自带的，不需要另外安装。
 ```
-
+### vue3使用vite
+```sh
+npm init vite@latest 
+# 使用vite选择对应的模板，可选大部分框架的模板
+```
 ## TSC
 > 一个官方推荐和开发的，自动运行+编译ts文件的typescript包
 ### 安装
@@ -76,4 +80,21 @@ tsc -v #检测是否安装成功
 ```sh
 tsc -help #帮助
 tsc -w xx.ts #监测ts文件变化，并且自动编译
+```
+
+## serve
+> 项目`build`后，都要先在本地测试一遍服务器，是否有bug。  
+> 常规是使用`five server`, `live server`,   
+> 但是会加重`vscode`的卡顿负担。  
+> 推荐一个全局工具包`serve`
+### 安装
+```sh
+npm i serve -g #安装依赖包，用于启动本地服务器
+```
+### 使用
+```sh
+serve -s dist 
+#一般打包以后, 打包后的项目，都与src同级别，一般是dist目录 
+# 也可以 serve -s ./dist
+# 并且自带监听端口，类似于nodemon
 ```

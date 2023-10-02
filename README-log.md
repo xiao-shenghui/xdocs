@@ -21,6 +21,9 @@
   - index.md 首页
 
 ## 最新日志和效果图
+- 更换主题，设计LOGO。
+<img src="./mdImg/home.jpg">
+
 - 添加`vitest`学习文档。
 <img src="./mdImg/vitest.jpg">
 
