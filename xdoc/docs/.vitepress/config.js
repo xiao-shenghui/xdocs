@@ -84,6 +84,7 @@ module.exports = {
           { text: 'Less',link: '/tool/less' },
           { text: 'Vitest',link: '/tool/vitest' },
           { text: 'Webpack',link: '/tool/webpack' },
+          { text: 'WebSocket',link: '/tool/websocket' },
         ]
       },
       {

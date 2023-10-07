@@ -21,6 +21,9 @@
   - index.md 首页
 
 ## 最新日志和效果图
+- 新增`websocket`客户端和服务端的使用。
+<img src="./mdImg/websocket.jpg">
+
 - 新增`webpack`核心概念及使用。
 <img src="./mdImg/webpack.jpg">
 
