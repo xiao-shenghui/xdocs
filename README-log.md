@@ -21,6 +21,9 @@
   - index.md 首页
 
 ## 最新日志和效果图
+- 更新和整理导航
+<img src="./mdImg/home.jpg">
+
 - 新增`websocket`客户端和服务端的使用。
 <img src="./mdImg/websocket.jpg">
 
@@ -28,7 +31,7 @@
 <img src="./mdImg/webpack.jpg">
 
 - 更换主题，设计LOGO。
-<img src="./mdImg/home.jpg">
+<img src="./mdImg/home-1.jpg">
 
 - 添加`vitest`学习文档。
 <img src="./mdImg/vitest.jpg">

@@ -21,19 +21,14 @@ module.exports = {
       // target 打开方式
       {
         // items子级下拉框
-        text: 'Javascript',
+        text: 'JS & TS',
         items: [
           { text: 'HTML5新增', link: '/javascript/html5/draggable&touch' },
           { text: 'JS基础', link: '/javascript/jsbasic/index' },
           { text: 'JS高级', link: '/javascript/jsdeep/index' },
           { text: 'ES6及6+', link: '/javascript/es6/index' },
-          { text: 'Ajax+', link: '/javascript/Ajax' }
-        ]
-      },
-      {
-        // items子级下拉框
-        text: 'Typescript',
-        items: [
+          { text: 'Ajax+', link: '/javascript/Ajax' },
+          { text: 'jQuery',link: '/tool/jquery/jQuery' },
           { text: 'TS导航', link: '/typescript/index' },
           { text: 'TS基础', link: '/typescript/typescript' },
           { text: 'TS合集', link: '/typescript/typescript-basic' },
@@ -42,20 +37,14 @@ module.exports = {
       },
       {
         // items子级下拉框
-        text: 'Vue',
+        text: 'Vue & React',
         items: [
           { text: 'Vue2', link: '/vue/vue2/index' },
           { text: 'Vue-Router', link: '/vue/vue-router/index' },
           { text: 'VueX', link: '/vue/vuex/vuex' },
           { text: 'Vue3', link: '/vue/vue3/index' },
           { text: 'Pina', link: '/vue/pina/pina' },
-        ]
-      },
-      {
-        // items子级下拉框
-        text: 'React',
-        items: [
-          { text: 'JSX', link: '/react/jsx/JSX' },
+          { text: 'React-JSX', link: '/react/jsx/JSX' },
           { text: 'React18', link: '/react/react18/create-react-app' }
         ]
       },
@@ -63,7 +52,8 @@ module.exports = {
         text: '小程序',
         items: [
           { text: '原生小程序', link: '/miniProgram/native' },
-          { text: 'Uniapp', link: '/miniProgram/uniapp' }
+          { text: 'Uniapp', link: '/miniProgram/uniapp' },
+          { text: 'React-Native', link: '/miniProgram/reactnative' }
         ]
       },
       {
@@ -71,29 +61,28 @@ module.exports = {
         items: [
           { text: '文件上传', link: '/scene/upload/index' },
           { text: '瀑布流', link: '/scene/water/waterfall' },
-          { text: '骨架屏', link: '/scene/skeleton/index' }
-        ]
-      },
-      {
-        text: '工具库',
-        items: [
-          { text: 'Axios',link: '/tool/axios/index' },
-          { text: 'Element-Ui',link: '/tool/element-ui/index' },
-          { text: 'jQuery',link: '/tool/jquery/jQuery' },
-          { text: 'Nodejs',link: '/tool/node/index' },
-          { text: 'Less',link: '/tool/less' },
-          { text: 'Vitest',link: '/tool/vitest' },
-          { text: 'Webpack',link: '/tool/webpack' },
+          { text: '骨架屏', link: '/scene/skeleton/index' },
           { text: 'WebSocket',link: '/tool/websocket' },
         ]
       },
       {
-        text: '杂七杂八',
+        text: '工程化',
         items: [
-          { text: 'Gitee',link: '/other/git' },
+          { text: 'Axios',link: '/tool/axios/index' },
+          { text: 'Element-Ui',link: '/tool/element-ui/index' },
+          { text: 'Nodejs',link: '/tool/node/index' },
+          { text: 'Less',link: '/tool/less' },
+          { text: 'Webpack',link: '/tool/webpack' },
+        ]
+      },
+      {
+        text: '部署和测试',
+        items: [
+          { text: 'Vitest',link: '/tool/vitest' },
           { text: 'Mysql',link: '/other/mysql' },
+          { text: 'Gitee',link: '/other/git' },
           { text: 'Nvm',link: '/other/nvm' },
-          { text: 'Npm包推荐',link: '/other/npm-recommend' }
+          { text: 'Npm包推荐',link: '/other/npm-recommend' },
         ]
       },
       {
