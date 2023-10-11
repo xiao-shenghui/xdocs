@@ -21,6 +21,9 @@
   - index.md 首页
 
 ## 最新日志和效果图
+- 新增`canvas画板`知识点
+<img src="./mdImg/canvas.jpg">
+
 - 更新和整理导航
 <img src="./mdImg/home.jpg">
 

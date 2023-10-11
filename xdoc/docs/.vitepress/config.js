@@ -190,7 +190,8 @@ module.exports = {
           text: 'HTML5新增',
           items: [
             { text: 'index', link: '/javascript/html5/index' },
-            { text: '拖拽和触摸', link: '/javascript/html5/draggable&touch' }
+            { text: '拖拽和触摸', link: '/javascript/html5/draggable&touch' },
+            { text: 'Canvas画板', link: '/javascript/html5/canvas' }
           ]
         }
       ],

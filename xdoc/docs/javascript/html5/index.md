@@ -7,3 +7,4 @@ next:
 # html5新增
 ## 导航目录
 - [拖拽和触摸](./draggable&touch)
+- [canvas画板](./canvas)
