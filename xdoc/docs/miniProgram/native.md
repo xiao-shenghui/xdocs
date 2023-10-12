@@ -162,4 +162,271 @@ module.exports.message = msg
 
 <view>{{m1.message}}</view>
 ```
-- 事件系统
+#### 事件系统
+> 分为`页面级组件`和`组件级组件`, 与`Vue`的写法和思想非常相似。
+
+#### `页面级组件`案例：
+- musicList.wxml
+```html
+<!-- 页面级组件的wxml -->
+<!-- 
+// 涉及 
+// - 响应式数据 
+// - 遍历渲染 
+// - 事件绑定 
+			bindxxx
+// - 事件传值 
+			data-xxx 和 e.currentTarget.dataset.xxx
+ -->
+
+ <!-- 来自某音乐案例  -->
+<view class="container">
+	<image src="{{musicDetail.coverImgUrl}}" class="coverImg"></image>
+	<view class="detail">
+		<view class="detail-name">{{musicDetail.name}}</view>
+		<view class="detail-description">{{musicDetail.description}}</view>
+	</view>
+</view>
+<block wx:for="{{musicDetail.tracks}}" wx:key="key">
+	<view class="song {{selectedId==item.id?'checked':''}}" bind:tap="onSelected" data-id="{{item.id}}" data-index="{{index}}">
+		<view class="serial-number">{{index+1}}</view>
+		<view class="song-detail">
+			<view class="song-name">{{item.name}}</view>
+			<view class="song-singer">{{item.ar[0].name}}</view>
+		</view>
+	</view>
+</block>
+```
+
+- musicList.js
+```js
+// 页面级组件的js  - 来自某音乐案例
+// 涉及 
+// -云函数 
+// - 路由及路由参数option 
+// - 组件生命周期 
+// - storage异步读取 
+// - 跳转页面
+
+// // 云函数初始化
+// wx.cloud.init({
+//   env: 'cloud1-0g174gz063995863',
+//   traceUser: true,
+// })
+
+// pages/musicList/musicList.js
+Page({
+  /**
+   * 页面的初始数据
+   */
+  data: {
+		listId: '',
+		musicDetail: {},
+		selectedId: ''
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+		// console.log(options); 路由传递过来的参数
+		// console.log(options.id);
+		this.setData({
+			listId: options.id
+		})
+		// 根据id，获取歌曲的细节。
+		// 调用云函数
+		wx.cloud.callFunction({
+			// 要调用的云函数名称
+			name: 'getMusicDetail',
+			// 传递给云函数的event参数
+			data: {
+				id: options.id
+			}
+		}).then(res => {
+			// console.log(res.result);
+			this.setData({
+				musicDetail: res.result
+			})
+		})
+  },
+	onSelected(e){
+		wx.setStorageSync('musicDetail', this.data.musicDetail)
+		this.setData({
+			selectedId: e.currentTarget.dataset.id
+		})
+		// 跳转页面到歌曲播放页
+		// 传递id和index
+		let url = '/pages/player/player?id='+this.data.selectedId + '&index=' + e.currentTarget.dataset.index
+		wx.navigateTo({
+			url: url,
+		})
+	},
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {},
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow() {},
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide() {},
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload() {},
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh() { },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom() {},
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage() {}
+})
+```
+
+#### `组件级组件`案例
+> app为页面级, xmain为某组件级.
+#### 父组件
+- app.json
+```json
+{
+  "usingComponents": {
+		"xheader": "/components/xheader/xheader",
+		"xmain": "/components/xmain/xmain"
+  }
+}
+```
+- app.wxml
+```html
+<!-- 以下来自todoList案例 -->
+<!-- 
+涉及:
+- 父->子组件传值 自定义属性传递
+- 使用子组件
+- 子->父组件传值 bind:提交自定义方法 触发父组件方法
+- e.detail接收方法携带的参数
+ -->
+<view>
+	<text class="mian-header">商品购物车</text>
+	<xheader bind:handAddF="handAdd"></xheader>
+	<xmain dataList="{{dataList}}" bind:handDel='handDel' bind:handUpdate="handUpdate"></xmain>
+</view>
+```
+
+- app.js
+```js
+// 只显示相关的dataList和handDel
+handAdd(e){
+	const data = this.data;
+	const dataList = this.data.dataList;
+	dataList.push(e.detail);
+	this.setData({
+		...data,
+		dataList
+	})
+},
+```
+#### 子组件
+- xmain.json
+```json
+{
+  "component": true,
+  "usingComponents": {}
+}
+```
+- xmain.wxml
+```html
+<<view class="goods">
+	<view wx:for="{{dataList}}" wx:key="key" class="goods-item">
+		<view class="goods-item">
+			<text class="goods-text">{{index}}</text>
+			<input value="{{item.val}}" disabled="{{item.disabled}}" 	bindinput="handleVal" focus="{{!item.disabled}}"/>
+		</view>
+		<button size="mini" type="primary" bind:tap="handEdit" data-id="{{item.id}}" data-val="{{editVal}}" data-item="{{item}}">{{item.disabled ? '编辑' : '确认'}}</button>
+		<button size="mini" type="warn" bind:tap="handDel" data-id="{{item.id}}">删除</button>
+	</view>
+</view>
+```
+
+- xmain.js
+```js
+// components/xmain/xmain.js
+/*
+涉及内容
+- 触发提交父组件事件 和 传递数据给父组件
+this.triggerEvent('xx',data)
+- 接收父组件传递过来的数据
+properties
+*/
+Component({
+  /**
+   * 组件的属性列表
+   */
+  properties: {
+		dataList:{
+			type: Array,
+			value: []
+		},
+  },
+
+  /**
+   * 组件的初始数据
+   */
+  data: {
+		editVal: ''
+  },
+
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+		handDel(e){
+			// 触发父级的删除
+			this.triggerEvent('handDel',e.currentTarget.dataset.id)
+			wx.showToast({
+				title: '删除成功',
+			})
+		},
+		handEdit(e){
+			let item = e.currentTarget.dataset.item
+			if(item.disabled){
+				// 编辑态回显
+				this.setData({
+					editVal: e.currentTarget.dataset.item.val
+				})
+				this.triggerEvent('handUpdate',[e.currentTarget.dataset.id,this.data.editVal])
+				return;
+			}
+			// 更新态
+			this.triggerEvent('handUpdate',[e.currentTarget.dataset.id,e.currentTarget.dataset.val])
+			wx.showToast({
+				title: '更新成功',
+			})
+			// let [id,val] = e.currentTarget.dataset;
+			// 编辑态回显，确认态更新，触发父级的更新
+		},
+		handleVal(e){
+			// console.log(e)
+			// console.log(e.detail.value);
+			this.setData({
+				editVal: e.detail.value
+			})
+		}
+  }
+})
+
+```
