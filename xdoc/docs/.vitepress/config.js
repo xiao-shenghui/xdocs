@@ -28,6 +28,7 @@ module.exports = {
           { text: 'JS高级', link: '/javascript/jsdeep/index' },
           { text: 'ES6及6+', link: '/javascript/es6/index' },
           { text: 'Ajax+', link: '/javascript/Ajax' },
+          { text: '数据结构与算法', link: '/javascript/dataStructure' },
           { text: 'jQuery',link: '/tool/jquery/jQuery' },
           { text: 'TS导航', link: '/typescript/index' },
           { text: 'TS基础', link: '/typescript/typescript' },
