@@ -202,6 +202,267 @@ queue.delData(); //1被删除了
 console.log(queue.arr);  //2,3,4,5
 ```
 
+### 链表
+> 链表由一系列`节点`和指向`下一个`节点的`指针`组成。   
+> 优点：可以`动态`且`快速`的增加和删除节点。  
+> 缺点：由于链表的顺序由指针决定，是`非连续的`。  
+> 因此`访问`第i个元素需要`遍历`整个链表，效率较低。
+```js
+// 用原生js实现链表
+// 定义链表的节点类
+class Node {
+  constructor(value) {
+    this.value = value;  //值
+    this.next = null;  //指向下一个节点的指针(引用)
+  }
+}
 
-## 基础算法
-> 更新中....
+// 定义链表类
+class LinkedList {
+  constructor() {
+    this.head = null; //头部指针
+    this.tail = null;  //尾部指针
+    this.length = 0;  //链表长度
+  }
+
+  // 在链表尾部添加节点 就是更改指针/引用即可。
+  append(value) {
+    const newNode = new Node(value);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
+    this.length++;
+  }
+
+  // 在链表指定位置插入节点, 时间复杂度为O(1)
+  insert(position, value) {
+    if (position < 0 || position > this.length) {
+      return false;
+    }
+    const newNode = new Node(value);
+    if (position === 0) {
+      newNode.next = this.head;
+      this.head = newNode;
+      if (!this.tail) {
+        this.tail = newNode;
+      }
+    } else if (position === this.length) {
+      this.tail.next = newNode;
+      this.tail = newNode;
+    } else {
+      let current = this.head;
+      let previous = null;
+      let index = 0;
+      while (index < position) {
+        previous = current;
+        current = current.next;
+        index++;
+      }
+      previous.next = newNode;
+      newNode.next = current;
+    }
+    this.length++;
+    return true;
+  }
+
+  // 根据值查找节点位置, 时间复杂度为O(n)
+  indexOf(value) {
+    let current = this.head;
+    let index = 0;
+    while (current) {
+      if (current.value === value) {
+        return index;
+      }
+      current = current.next;
+      index++;
+    }
+    return -1;
+  }
+
+  // 根据位置删除节点, 时间复杂度为O(1)
+  removeAt(position) {
+    if (position < 0 || position >= this.length) {
+      return null;
+    }
+    let current = this.head;
+    if (position === 0) {
+      this.head = current.next;
+      if (this.length === 1) {
+        this.tail = null;
+      }
+    } else {
+      let previous = null;
+      let index = 0;
+      while (index < position) {
+        previous = current;
+        current = current.next;
+        index++;
+      }
+      previous.next = current.next;
+      if (position === this.length - 1) {
+        this.tail = previous;
+      }
+    }
+    this.length--;
+    return current.value;
+  }
+
+  // 根据值删除节点
+  remove(value) {
+    const position = this.indexOf(value);
+    return this.removeAt(position);
+  }
+
+  // 判断链表是否为空
+  isEmpty() {
+    return this.length === 0;
+  }
+
+  // 返回链表长度
+  size() {
+    return this.length;
+  }
+
+  // 返回链表头部节点的值
+  getHead() {
+    return this.head ? this.head.value : null;
+  }
+
+  // 返回链表尾部节点的值
+  getTail() {
+    return this.tail ? this.tail.value : null;
+  }
+
+  // 将链表转换为数组
+  toArray() {
+    const result = [];
+    let current = this.head;
+    while (current) {
+      result.push(current.value);
+      current = current.next;
+    }
+    return result;
+  }
+
+  // 将链表转换为字符串
+  toString() {
+    return this.toArray().toString();
+  }
+}
+
+// 测试代码
+const list = new LinkedList();
+list.append(1);
+list.append(2);
+list.append(3);
+list.insert(1, 4);
+console.log(list.toArray()); // [1, 4, 2, 3]
+console.log(list.indexOf(2)); // 2
+console.log(list.remove(4)); // 4
+console.log(list.toArray()); // [1, 2, 3]
+console.log(list.size()); // 3
+console.log(list.getHead()); // 1
+console.log(list.getTail()); // 3
+console.log(list.toString()); // 1,2,3
+```
+
+### 链表 VS 数组
+> 链表中数据指定位置的`添加`和`删除`, 只需要更改`指针引用`即可。  
+> 因此这两种操作的时间复杂度为`O(1)`.  
+> 但是链表的`查询`需要遍历找指针，因此时间复杂时间复杂度为`O(n)`.  
+```js
+// 以添加为例：
+append(value) {
+	const newNode = new Node(value);
+	if (!this.head) {
+	  this.head = newNode;
+	  this.tail = newNode;
+	} else {
+	  this.tail.next = newNode;
+	  this.tail = newNode;
+	}
+	this.length++;
+}
+```
+> 数组的`查询`有时候非常简单，时间复杂度为`O(1)`  
+> 但是数组指定位置的`添加`和`删除`，需要遍历，时间复杂度为`O(n)`   
+> 并且需要重新为数组分配空间，空间复杂度增加.
+
+- 总结:
+- 链表适用于需要`频繁`动态的`添加`、`删除`的操作。  
+- 数组适用于需要`频繁`的`查询`操作。
+
+### 链表应用场景
+1. 实现`栈和队列`：与数组一样，链表也是有顺序的数据结构
+2. 实现`哈希表`：可以用链表解决`哈希冲突`的问题。
+3. 实现`图`: 链表的`指针`特点，非常适合用于实现图。
+
+```js
+/*
+哈希冲突：两个或多个数据集之间有某种关联性，
+不符合使用哈希实现均匀散布的目的。
+*/
+```
+
+## 算法
+### 常见算法思想
+#### 回溯算法
+> 一种`按优尝试性`的算法思想。
+> 当问题解有`多种可能`, 优先按`优`尝试求解。  
+> 当`某种`可能求解失败，`重头再来`，替换第二个求解方式。
+
+#### 贪心算法
+> 一种`按当前最优`求解的算法思想。  
+> 当问题解`目前`有一个`最优选择`, 就按目前的方式求解。  
+> 不从整体看考虑，考虑`局部最优解`。
+
+#### 分治法
+> 一种`规模分解`求解的算法思想。  
+> 当一个规模为`n`的问题短期难以求解，则分解为多个`子规模`  
+> 必要时通过`递归`，`组合`等方式，`合并`问题的解得到最终解。
+
+#### 动态规划
+> 一种`规模分解`的算法思想，和分治法很像。  
+> 其注意`子问题解决`的顺序，`先求解`易解决的子问题。  
+> 并且保存`前面的解`, 以便后续可以`重复利用`。
+> 后续阶段通过`前面的解`+`决策`得到问题最优解。
+
+- 动态规划和分治法的区别
+- 目标不同: 
+	- 分治法: 为了问题`能被解决`，而分解为子问题，并一一求解。
+	- 动态规划: 为了求得问题的`最优解`, 而分解子问题，并以易求解优先。
+- 子问题重复利用:
+	- 分治法: 不会保存子问题的解。
+	- 动态规划: 保存`前面的解`, 以便后续可以`重复利用`。
+- 子问题规模:
+	- 分治法: 分解为多个一样的规模。
+	- 动态规划: 分解为较小的子问题。
+- 时间复杂度和空间复杂度:
+	- 分支法: 不产生额外空间，但是时间复杂度较高。
+	- 动态规划: 需要额外空间保存子问题解，但是时间复杂度较低。
+
+### 排序算法
+#### 冒泡排序
+> 小气泡不断往上冒泡，直到变大。   
+> 两个元素不断比较，较小的排序在前，直到排序完成。
+
+#### 插入排序
+> 和打扑克抓牌一样，根据抓到的牌，插入到手上。
+> 先把第2个元素`额外存`起来，  
+> 根据后续元素的大小，插入到`额外数组`里面。
+
+#### 选择排序
+> 宏观的排序思想，每次把`最小的`选出来, 放置到最左边。  
+> 然后选除了`该元素外`，`最小的`选出来, 递归排序。
+
+#### 快速排序
+> 采用`分治法`配合`基准值`的算法思想，将数组分为`两个子数组`。  
+> 基准值: 计算数组的平均值，作为基准值。
+> 分治规定: `左边`数组的元素`小于`基准值，`右边`元素`大于`基准值。  
+> 然后根据`与基准值比较`, 继续划分，`递归快排`直到划分完整。  
+> 快速排序是数组`sort`排序方式的实现原理。
+
