@@ -157,3 +157,50 @@ window.onload = function () {
     },3000)
 }
 ```
+
+### 封装一个通用的骨架屏组件
+- skeleton.vue
+- 支持width, height, circle, class作为props.  
+- 后续可以支持动画。
+```html
+<template>
+    <div style="background-color: rgb(245, 245, 241);" :style="getStyle" :class="getClass">
+
+    </div>
+</template>
+
+<script>
+    export default {
+        props: {
+            width: {
+                type: [Number, String],
+                default: 0
+            },
+            height: {
+                type: [Number, String],
+                default: 0
+            },
+            circle:{
+                type: Boolean,
+                default: false
+            },
+            oClass: {
+                type: String,
+                default: ''
+            }
+        },
+        computed:{
+            getStyle(){
+                return `width:${this.width};height:${this.height}`
+            },
+            getClass(){
+                let c = ""
+                if (this.circle) {
+                    c += 'rounded-circle'
+                }
+                return `${c} ${this.oClass}`
+            }
+        }
+    }
+</script>
+```

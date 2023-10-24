@@ -125,6 +125,170 @@ export {
 // 	say
 // }
 ```
+## webpack打包优化
+> 具体从`webpack-bundle-analyzer`插件查看依赖  
+> 到`按需加载`，`resolve配置`, `代码压缩`, `sourceMap`的角度。
+
+### webpack-bundle-analyzer插件
+> 一个 plugin 和 CLI 工具，它将 bundle 内容  
+> 展示为一个`便捷的`、交互式、可缩放的`树状图形式`。   
+> `不需要`的或者`体积较大`的依赖包来进行针对性的优化。
+
+- 普通项目，`插件`使用
+1. 安装
+```sh
+npm i webpack-bundle-analyzer --save-dev
+```
+2. 引入插件
+```js
+const BundleAnalyzer = require('webpack-bundle-analyzer')
+// webpack.config.js
+module.exports = {
+	plugins: [
+		// 配置插件
+		new BundleAnalyzer(), //使用默认配置
+
+	]
+}
+```
+3. 运行查看
+```sh
+npm run build --report
+```
+- 也支持`CLI`使用, 
+> 具体查看插件官网 [Options (for CLI)](https://github.com/webpack-contrib/webpack-bundle-analyzer)
+
+- vue-cli2中: 
+> 内置webpack-bundle-analyzer  
+> 直接运行查看。
+
+### 具体优化
+### 按需加载
+1. 路由`懒加载`，`异步加载`组件。 vue2和vue3都有对应的API.  
+2. 组件库引入方式：按需加载第三方组件或插件。
+
+### 优化loader解析查找规则 
+- 优化webpack中loader的配置(rules)
+	- test: 优化正则表达式，减少文件查询时间
+	- loader: 开启cacheDirectory选项，开启缓存，
+	- 添加include, exclude, 指定或者排除无关文件
+
+- 示例
+```js
+// webpack.config.js
+module.exports = {
+	// 通过rules配置所有的loader
+	rules: [
+		{
+			test: '/\.js$/',  
+			loader: 'bable-loader?cacheDirectory', //在loader上，添加?cacheDirectory
+			include:[resolve('src')]
+		}
+	]
+}
+```
+
+### 优化文件路径 - resolve
+> resolve可以设置模块如何的规则`被查找`和`被解析`  
+> 例如`import 'lodash'`, 设置依次查找解析`.js`,`.vue`
+
+- 优化webpack中的resolve的配置
+- 配置别名，设置解析查找规则，加快查找模块的速度
+	- 配置extensions选项，配置解析规则
+	- 配置alias选项，配置别名
+```js
+// webpack.config.js
+module.exports = {
+	resolve:{
+		extensions: ['.js','.vue','.json'],
+		alias: {
+			'@': resolve('src')
+		}
+	}
+}
+
+// 配置完如上, 即可以在项目中引入和配置
+import tool from '@/utils/tool'
+// 会从src开始查找，仅查找.js, .vue, .json后缀
+```
+
+### 代码压缩 - optimization
+> webpack开启`production`模式时，会默认使用`TerserPlugin`插件，对代码压缩。  
+> 指定别的压缩插件(例如[`closure-webpack-plugin`](https://github.com/webpack-contrib/closure-webpack-plugin))   
+> 将它作为 `optimization.minimizer`, 插件确保具有`Tree-Shaking`的能力. 
+
+- tree-shaking: 
+	- **rollup**提出的一种概念，具有`删除未引用代码`(dead code)的能力  
+
+- 通过配置`optimization`中的`minimizer`选项，可以配置压缩插件
+```js
+const ClosurePlugin = require('closure-webpack-plugin')
+// 例如指定生产模式
+module.exports = {
+	// mode: 'production',
+	// 例如使用ClosurePlugin插件压缩
+	optimization: {
+		minimizer: [
+			new ClosurePlugin()
+			/* 默认等价于如下配置
+			new ClosurePlugin({mode: 'STANDARD'}, {
+		        // compiler flags here
+		        //
+		        // for debugging help, try these:
+		        //
+		        // formatting: 'PRETTY_PRINT'
+		        // debug: true,
+		        // renaming: false
+		      })
+			*/
+		    ]
+		]
+	}
+}
+```
+
+### 关闭sourceMap - 生产环境
+> sourceMap是一种映射功能，可以将打包后的代码映射到原始位置。  
+> 便于开发时追踪到错误和警告。 
+
+- 如何开启source-map? 
+- 配置webpack中的`devtool`
+```js
+// webpack.cofig.js
+module.exports = {
+	devtool: 'inline-source-map',
+	// 一般配合webpack-dev-server使用(见webpack官网)
+	// 指定serve路径
+	devServer: {
+		static: './dist',
+	}
+}
+```
+- 例如
+```js
+/*
+Uncaught ReferenceError: cosnole is not defined
+   at HTMLButtonElement.printMe (print.js:2)
+*/
+```
+
+- 如何关闭source-map?
+- 配置webpack中的`devtool`
+```js
+module.exports = {
+	devtool: 'none'
+}
+```
+
+- vuecli中的sourceMap配置
+	- productionSourceMap
+```js
+//vue.config.js
+module.exports = {
+	productionSourceMap: false,  //默认为true
+	// 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
+}
+```
 
 ## 从零搭建一个vue-webpack模板
 > 基于上面学习的`核心配置`, 以及`vue-loader`的内容.    

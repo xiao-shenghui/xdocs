@@ -29,6 +29,31 @@ nvm list available # 查看可安装的node版本大全
 > 每个`node版本`对应一个`npm版本`, 因此每个`node版本`安装的包，都仅限于该版本使用。  
 > 如果切换了版本, 需要重新安装。
 
+## nrm
+> 可以`免重置镜像`，内置`npm`,`yarn`,`cnpm`和`taoboa`等多个镜像。  
+### 全局安装
+```sh
+npm i nrm -g
+```
+
+### 使用
+```sh
+nrm use npm # 切换到npm
+nrm ls #显示所有镜像
+```
+
+## pnpm
+> 比npm更快，将已经下载过的依赖，保存到硬盘缓存，别的项目从缓存读取。
+### 全局安装
+```sh
+npm i pnpm -g
+```
+### 使用
+```sh
+# 和npm一样使用
+pnpm i element-ui --save
+```
+
 ## Nodemon
 > 代替node启动js文件(node服务器)，在js文件每次修改时，自动重启。
 ### 全局安装
