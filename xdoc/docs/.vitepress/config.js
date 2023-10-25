@@ -23,12 +23,13 @@ module.exports = {
         // items子级下拉框
         text: 'JS & TS',
         items: [
+          { text: '数据结构与算法', link: '/javascript/dataStructure' },
+          { text: '计算机网络', link: '/javascript/computerNet' },
           { text: 'HTML5新增', link: '/javascript/html5/draggable&touch' },
           { text: 'JS基础', link: '/javascript/jsbasic/index' },
           { text: 'JS高级', link: '/javascript/jsdeep/index' },
           { text: 'ES6及6+', link: '/javascript/es6/index' },
           { text: 'Ajax+', link: '/javascript/Ajax' },
-          { text: '数据结构与算法', link: '/javascript/dataStructure' },
           { text: 'jQuery',link: '/tool/jquery/jQuery' },
           { text: 'TS导航', link: '/typescript/index' },
           { text: 'TS基础', link: '/typescript/typescript' },
@@ -64,6 +65,7 @@ module.exports = {
           { text: '瀑布流', link: '/scene/water/waterfall' },
           { text: '骨架屏', link: '/scene/skeleton/index' },
           { text: 'WebSocket',link: '/tool/websocket' },
+          { text: '直播流',link: '/scene/liveplayer' },
         ]
       },
       {

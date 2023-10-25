@@ -1,1 +1,0 @@
-import{_ as t,o as d,c as e,V as r}from"./chunks/framework.3745025a.js";const b=JSON.parse('{"title":"场景","description":"","frontmatter":{},"headers":[],"relativePath":"scene/index.md","filePath":"scene/index.md"}'),a={name:"scene/index.md"},o=r("",4),n=[o];function s(c,_,i,h,l,p){return d(),e("div",null,n)}const m=t(a,[["render",s]]);export{b as __pageData,m as default};
