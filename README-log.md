@@ -21,6 +21,9 @@
   - index.md 首页
 
 ## 最新日志和效果图
+- 更新和整理导航
+<img src="./mdImg/home-2.jpg">
+
 - 新增`数据结构与算法`文档
 <img src="./mdImg/dataConstructor.jpg">
 

@@ -24,7 +24,7 @@ Overview
 
 A front-end blog which is based on [Vitepress v1.0.0](https://vitepress.dev/)，[XDocs](https://github.com/xiao-shenghui/xdocs.git) 
 
-![home](./mdImg/home.jpg)
+![home](./mdImg/home-2.jpg)
 
 
 Navigation

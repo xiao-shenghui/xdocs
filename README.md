@@ -25,7 +25,7 @@ Overview
 
 基于 [Vitepress v1.0.0](https://vitepress.dev/)的前端技术文档，[XDocs](https://github.com/xiao-shenghui/xdocs.git) 
 
-![home](./mdImg/home.jpg)
+![home](./mdImg/home-2.jpg)
 
 
 导航目录
