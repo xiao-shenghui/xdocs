@@ -68,8 +68,9 @@ module.exports = {
             {
                 text: '小程序',
                 items: [
-                    { text: '原生小程序', link: '/miniProgram/native' },
+                    { text: '微信小程序', link: '/miniProgram/native' },
                     { text: 'Uniapp', link: '/miniProgram/uniapp' },
+                    { text: '位置和地图', link: '/miniProgram/map' },
                     { text: 'React-Native', link: '/miniProgram/reactnative' }
                 ]
             },

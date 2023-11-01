@@ -21,6 +21,9 @@
   - index.md 首页
 
 ## 最新日志和效果图
+- 新增小程序-地图和位置文档
+<img src="./mdImg/home-2.jpg">
+
 - 更新和整理导航
 <img src="./mdImg/home-2.jpg">
 

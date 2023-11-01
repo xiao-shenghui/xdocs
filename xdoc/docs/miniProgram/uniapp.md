@@ -127,3 +127,6 @@ uni.chooseImage({
 > 图片资源的适配  
 > 功能的兼容性  
 > 调试和测试
+
+## 地图组件和API
+> 参考至[`uniapp官网-地图组件控制`](https://uniapp.dcloud.net.cn/api/location/map.html#createmapcontext)
