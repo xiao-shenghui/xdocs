@@ -129,4 +129,115 @@ uni.chooseImage({
 > 调试和测试
 
 ## 地图组件和API
-> 参考至[`uniapp官网-地图组件控制`](https://uniapp.dcloud.net.cn/api/location/map.html#createmapcontext)
+> 参考至[`uniapp官网-地图组件控制`](https://uniapp.dcloud.net.cn/api/location/map.html#createmapcontext)   
+> 参考我的(作者)模板项目 [uniapp-template](https://github.com/xiao-shenghui/uniapp-template)(一个集成了地图，uView, 自定义TabBar, Store 和 常用uView组件 的uniapp 模板项目。)
+
+
+## 使用uView
+## 起步
+### 下载
+1. 下载插件市场的`uView.zip`  
+2. 重命名为`uview-ui`, 将整个文件放到根目录下。
+### 引入
+1. 引入js库
+```js
+// main.js
+import uView from "uview-ui";
+Vue.use(uView);
+```
+2. 引入全局scss主题文件
+```css
+/* uni.scss */
+@import 'uview-ui/theme.scss';
+```
+3. 引入uView基础样式
+```html
+<!-- App.vue -->
+<style lang="scss">
+	/* 注意要写在第一行，
+	同时给style标签加入 lang="scss" 属性 */
+	@import "uview-ui/index.scss";
+</style>
+```
+### 配置easycom组件模式
+> 注意：修改easycom 规则`不会实时生效`，配置完后，您需要`重启`HX或者重新编译项目
+```json
+// pages.json
+{
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
+}
+```
+
+## 组件测试
+### Tabbar底部导航栏
+```html
+<u-tabbar v-model="current" :list="list" :mid-button="true"></u-tabbar>
+```
+```js
+export default {
+		data() {
+			return {
+				list: [{
+						iconPath: "home",
+						selectedIconPath: "home-fill",
+						text: '首页',
+						count: 2,
+						isDot: true,
+						customIcon: false,
+					},
+					{
+						iconPath: "photo",
+						selectedIconPath: "photo-fill",
+						text: '放映厅',
+						customIcon: false,
+					},
+					{
+						iconPath: "https://cdn.uviewui.com/uview/common/min_button.png",
+						selectedIconPath: "https://cdn.uviewui.com/uview/common/min_button_select.png",
+						text: '发布',
+						midButton: true,
+						customIcon: false,
+					},
+					{
+						iconPath: "play-right",
+						selectedIconPath: "play-right-fill",
+						text: '直播',
+						customIcon: false,
+					},
+					{
+						iconPath: "account",
+						selectedIconPath: "account-fill",
+						text: '我的',
+						count: 23,
+						isDot: false,
+						customIcon: false,
+					},
+				],
+				current: 0
+			}
+		},
+	}
+```
+
+### Swiper 轮播图
+> 注意: 必须给`u-swiper`设置宽度，不然内容会不显示。
+```html
+<u-swiper :list="listitem"></u-swiper>
+```
+```js
+listitem: [{
+		image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
+		title: '昨夜星辰昨夜风，画楼西畔桂堂东'
+	},
+	{
+		image: 'https://cdn.uviewui.com/uview/swiper/2.jpg',
+		title: '身无彩凤双飞翼，心有灵犀一点通'
+	},
+	{
+		image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
+		title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
+	}
+]
+```
