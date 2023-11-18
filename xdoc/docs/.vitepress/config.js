@@ -93,6 +93,7 @@ module.exports = {
                             { text: 'Element-Ui', link: '/tool/element-ui/index' },
                             { text: 'Nodejs', link: '/tool/node/index' },
                             { text: 'Less', link: '/tool/less' },
+                            { text: 'Sass', link: '/tool/sass' },
                             { text: 'Webpack', link: '/tool/webpack' },
                         ]
                     },
