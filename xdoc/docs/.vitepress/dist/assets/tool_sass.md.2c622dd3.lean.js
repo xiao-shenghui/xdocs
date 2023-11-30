@@ -1,1 +1,0 @@
-import{_ as s,o as a,c as n,V as l}from"./chunks/framework.3745025a.js";const y=JSON.parse('{"title":"sass","description":"","frontmatter":{},"headers":[],"relativePath":"tool/sass.md","filePath":"tool/sass.md"}'),e={name:"tool/sass.md"},o=l("",13),p=[o];function r(t,c,i,C,d,b){return a(),n("div",null,p)}const D=s(e,[["render",r]]);export{y as __pageData,D as default};
