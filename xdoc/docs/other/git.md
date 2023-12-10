@@ -1,5 +1,49 @@
 # git 使用体验。
 > 需求：1.提交一个html文件到gitee的仓库（"测试库-xiao"）里面。
+## git常用命令大全
+- git config 
+	- git config --global user.name "xxx" 设置本地仓库用户名
+	- git config --global user.email "xxx" 设置本地仓库邮箱
+	- git config --list # 查看邮箱和用户名
+- git remote 
+	- 链接远程仓库 
+	- git remote add 仓库别名 仓库URL
+	- git remote remove 仓库别名 仓库URL
+- git add xx 
+	- 添加文件到暂存区
+- git commit -m "xxx" 
+	- 将暂存区文件提交到本地
+- git push 远程仓库别名 分支名, 推送到远程。 例如git push origin master
+- git pull 远程仓库别名 分支名, 
+	- 拉取最新代码到本地目录进行自动合并。 
+	- 实际上是git fetch 和 git merge的综合操作。
+- git fetch 远程仓库别名 分支名,
+	- 获取远程仓库数据到本地分支，包括最新分支，提交记录，代码更新等等。
+- git merge 
+	- git merge 别的分支名。
+	- 合并当前分支和别的分支，可选 --abort，--ff，
+	- 会产生一次新的提交记录。
+	- 解决合并冲突： git add 
+- git log 
+	- 查看提交记录，按Q退出
+- git checkout -b 分支名
+	- 切换分支，用于开发	
+- git reset --hard 提交记录的id
+	- 有多个可选，--hard, --mixed, --soft 
+	- 代码回滚到指定的commit
+	- reset之后，要git push -f才会生效。
+- git revert 提交记录的id
+	- 撤销指定commit的修改，并且不影响后续的commit，
+	- 保留完整的 git 历史,对多人合作的分支来说比较友好。
+	- revert执行后不会清除记录，并且会产生新纪录，所以文件不会丢失
+	- 可以多次执行revert恢复到某次改变之前的状态；
+- git rebase 分支名
+	- 变基操作，会把你当前分支的 commit 放到变基分支的最后面，并且合并。
+	- 例如你从master分支拉的A分支进行开发，别人在master分支合并了代码，此时就有用了。
+- git branch 新的分支
+	- 本地创建新的分支
+	- git branch -d 分支名，删除分支
+
 ## 1.首次提交：
 首次提交，先输入github/gitlab等的用户名和邮箱
 ```sh
