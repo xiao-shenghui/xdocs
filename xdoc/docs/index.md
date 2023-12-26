@@ -17,6 +17,11 @@ features:
     details: 适合前端的 LeetCode 题解网站
     linkText: 跳转
     link: https://xiao-shenghui.github.io/xdocs-leetcode/#/
+  - icon: 🚧
+    title: 其他网站 - XDocs-E-ISSUE
+    details: 适合前端的博客/ISSUE/文章编辑器工具
+    linkText: 跳转
+    link: https://xiao-shenghui.github.io/e-issue.github.io/#/
 
 hero:
   name: XDocs

@@ -123,3 +123,19 @@ serve -s dist
 # 也可以 serve -s ./dist
 # 并且自带监听端口，类似于nodemon
 ```
+
+## rimraf
+> 一个用命令行快速删除大型文件的工具  
+> 前端`node_modules`文件夹经常因为下载依赖包出错而要删除，  
+> 使用系统自带的删除非常慢, 且有时候系统会卡死, 因为系统要检索文件。  
+> 使用`rimraf`工具，可以快速删除选定的文件夹及内容。  
+
+### 安装
+```sh
+cnpm i rimraf -g #安装依赖包，用于删除文件夹
+``` 
+
+### 使用
+```sh
+rimraf node_modules #删除node_modules文件夹
+```
