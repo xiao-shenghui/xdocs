@@ -1,0 +1,1 @@
+import{_ as s,o as n,c as a,V as l}from"./chunks/framework.3745025a.js";const i=JSON.parse('{"title":"踩坑日记","description":"","frontmatter":{},"headers":[],"relativePath":"blog/puddle.md","filePath":"blog/puddle.md"}'),p={name:"blog/puddle.md"},o=l("",7),e=[o];function t(r,c,F,y,D,A){return n(),a("div",null,e)}const u=s(p,[["render",t]]);export{i as __pageData,u as default};

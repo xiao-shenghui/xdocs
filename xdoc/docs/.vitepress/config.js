@@ -2,6 +2,7 @@ module.exports = {
     title: 'XDocs',
     description: '一个用于记录的vitepress静态博客',
     base: '/xdocs.github.io/',
+    head: [['link', { rel: 'icon', type: 'image/png', href: '/logo.svg' }]],
     markdown: {
         lineNumbers: true
     },
@@ -22,6 +23,7 @@ module.exports = {
             // text 标题
             // link 链接
             // target 打开方式
+            { text: '网络日志', link: '/blog/index' },
             {
                 // items子级下拉框
                 text: 'JS & TS',
@@ -124,6 +126,14 @@ module.exports = {
         ],
         // 配置侧边栏sidebar
         sidebar: {
+            '/blog': [{
+                text: '网络日志',
+                items: [
+                    { text: '栏目导航', link: '/blog/index' },
+                    { text: '踩坑日志', link: '/blog/puddle' },
+                    { text: '今日分享', link: '/blog/share' },
+                ]
+            }],
             '/vue/vue2': [{
                 text: 'Vue2',
                 // collapsed: true,
