@@ -6,6 +6,7 @@ module.exports = {
         lineNumbers: true
     },
     themeConfig: {
+        logo: '/public/Logo.png',
         // 社交账号
         socialLinks: [
             { icon: 'github', link: 'https://github.com/xiao-shenghui/xdocs' }
@@ -263,8 +264,8 @@ module.exports = {
         },
         // 底部,支持a标签
         footer: {
-            message: '一个前端小菜鸟的静态博客 - xdocs',
-            copyright: 'Copyright © 2019-present <a href="https://github.com/yyx990803" target="_blank">Evan You</a>'
+            message: '一个陪你成长的前端博客 - XDocs',
+            copyright: 'Copyright © 2023-present <a href="https://github.com/xiao-shenghui" target="_blank">ShengHui</a>'
         },
         // 搜索框
         search: {
